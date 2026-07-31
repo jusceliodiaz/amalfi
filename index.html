@@ -1,0 +1,663 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Interactive Explorer | Factory Studio</title>
+    <meta
+      name="description"
+      content="Factory Studio — explore the development in 3D with immersive navigation between the facade, pool and leisure areas. High-end interactive archviz, directly in your browser."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Factory Studio" />
+    <meta
+      name="keywords"
+      content="Factory Studio, interactive 3D tour, interactive archviz, 3D real estate visualization, immersive architecture experience, interactive exterior tour, virtual property tour Europe"
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Interactive 3D Exterior Tour | Factory Studio"
+    />
+    <meta
+      property="og:description"
+      content="Factory Studio — walk through the development before visiting the showroom. Immersive archviz tour featuring aerial and pool views."
+    />
+    <meta
+      property="og:image"
+      content="https://www.factorystudio.works/images/og_firstperson.jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Interactive 3D exterior tour — Factory Studio"
+    />
+    <meta
+      property="og:url"
+      content="https://www.factorystudio.works/firstperson.html"
+    />
+    <meta property="og:site_name" content="Factory Studio" />
+    <meta property="og:locale" content="en_GB" />
+    <link
+      rel="canonical"
+      href="https://www.factorystudio.works/firstperson.html"
+    />
+    <link rel="icon" type="image/png" href="images/fav-icon.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@weare.factory" />
+    <meta
+      name="twitter:title"
+      content="Interactive 3D Exterior Tour | Factory Studio"
+    />
+    <meta
+      name="twitter:description"
+      content="Factory Studio — walk through the development before visiting the showroom. Immersive archviz tour featuring aerial and pool views."
+    />
+    <meta
+      name="twitter:image"
+      content="https://www.factorystudio.works/images/og_firstperson.jpg"
+    />
+    <!-- Google tag (gtag.js) — lazy-loaded after page load -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-3K51DFTX3J");
+      window.addEventListener("load", function () {
+        var s = document.createElement("script");
+        s.async = true;
+        s.src = "https://www.googletagmanager.com/gtag/js?id=G-3K51DFTX3J";
+        document.head.appendChild(s);
+      });
+    </script>
+    <link
+      rel="preload"
+      href="images/seq_arch_m/aereo_to_piscina_00.jpg"
+      as="image"
+      media="(max-width: 767px), (hover: none)"
+    />
+    <link
+      rel="preload"
+      href="images/seq_arch/aereo_to_piscina_00.jpg"
+      as="image"
+      media="(min-width: 768px) and (hover: hover)"
+    />
+    <link rel="preload" href="images/1.webm" as="video" type="video/webm" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Cormorant+Garamond:wght@400;500;600&display=swap"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
+    />
+    <noscript
+      ><link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Cormorant+Garamond:wght@400;500;600&display=swap"
+    /></noscript>
+    <link rel="stylesheet" href="styles.css?v=5" />
+  </head>
+  <body>
+    <div id="preloader">
+      <img id="preloader-logo" src="images/logo.svg" alt="Logo" />
+      <div id="preloader-status">
+        <span>Loading…</span>
+        <strong id="preloader-pct">0%</strong>
+      </div>
+      <button id="preloader-start" type="button">Enter</button>
+    </div>
+
+    <div id="cursor"></div>
+    <div id="ring"></div>
+    <div id="noise"></div>
+
+    <div id="stage">
+      <video id="main-video" muted loop playsinline preload="auto"></video>
+      <video id="ab-video-b" muted loop playsinline preload="auto"></video>
+      <canvas id="seq-canvas"></canvas>
+      <div id="poi-layer"></div>
+    </div>
+
+    <img id="site-logo" src="images/logo.svg" alt="Logo" />
+
+    <div id="scene-tag"></div>
+    <div id="track"></div>
+
+    <!-- Shop button — opens the IKEA Italia shop panel -->
+    <div id="shop-btn" tabindex="-1" title="Shop" onclick="shopToggle()">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l1.5-5h15L21 9" />
+        <path d="M3 9h18v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9z" />
+        <path d="M8 13a2 2 0 0 0 4 0M12 13a2 2 0 0 0 4 0" />
+      </svg>
+      <span id="shop-btn-badge"></span>
+    </div>
+
+    <!-- Always-visible order total — appears once furniture is selected -->
+    <div id="shop-total-pill" tabindex="-1" title="Order summary"></div>
+
+    <!-- SHOP PANEL — right drawer -->
+    <div id="shop-panel">
+      <div id="shop-panel-header">
+        <div id="shop-panel-title">Shop <span>IKEA Italia</span></div>
+        <div id="shop-panel-close" onclick="shopToggle()" tabindex="-1">
+          <svg viewBox="0 0 10 10">
+            <line x1="2" y1="2" x2="8" y2="8" />
+            <line x1="8" y1="2" x2="2" y2="8" />
+          </svg>
+        </div>
+      </div>
+      <div id="shop-tabbar">
+        <button class="shop-tab-btn active" data-tab="sofas" onclick="shopSwitchTab('sofas')">
+          Sofas
+        </button>
+        <button class="shop-tab-btn" data-tab="chairs" onclick="shopSwitchTab('chairs')">
+          Chairs
+        </button>
+        <button class="shop-tab-btn" data-tab="plants" onclick="shopSwitchTab('plants')">
+          Plants
+        </button>
+        <button class="shop-tab-btn" data-tab="floor" onclick="shopSwitchTab('floor')">
+          Floors
+        </button>
+      </div>
+      <div id="shop-grid"></div>
+      <div id="shop-panel-footer">
+        <div class="shop-foot-total">
+          <span>Selected</span>
+          <strong id="shop-panel-total">€ 0</strong>
+        </div>
+        <button id="shop-order-btn" onclick="shopOpenOrder()" disabled>View Order</button>
+      </div>
+    </div>
+
+    <!-- SHOP 3D VIEWER MODAL -->
+    <div id="shop3d-modal">
+      <div id="shop3d-card">
+        <button id="shop3d-close" title="Close">
+          <svg viewBox="0 0 14 14">
+            <line x1="2" y1="2" x2="12" y2="12" />
+            <line x1="12" y1="2" x2="2" y2="12" />
+          </svg>
+        </button>
+        <div id="shop3d-stage">
+          <div id="shop3d-loading"><span></span><span></span><span></span></div>
+        </div>
+        <div id="shop3d-footer">
+          <div id="shop3d-title"></div>
+          <div id="shop3d-price"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SHOP ORDER SUMMARY MODAL -->
+    <div id="shop-order-modal">
+      <div id="shop-order-card">
+        <div id="shop-order-header">
+          <div>
+            <div id="shop-order-title">Order Summary</div>
+            <div id="shop-order-sub">Review your selection before confirming.</div>
+          </div>
+          <div id="shop-order-close" onclick="shopCloseOrder()" tabindex="-1">
+            <svg viewBox="0 0 10 10">
+              <line x1="2" y1="2" x2="8" y2="8" />
+              <line x1="8" y1="2" x2="2" y2="8" />
+            </svg>
+          </div>
+        </div>
+
+        <div id="shop-order-body">
+          <div id="shop-order-list"></div>
+
+          <div id="shop-order-total-row">
+            <span>Estimated total</span>
+            <strong id="shop-order-total">€ 0</strong>
+          </div>
+        </div>
+
+        <div id="shop-order-actions">
+          <button id="shop-keep-btn" onclick="shopCloseOrder()">Keep editing</button>
+          <button id="shop-confirm-btn" onclick="shopConfirmOrder()">Confirm order</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slider A/B — Pool scene only: side A = day (video playing), side B = night -->
+    <div id="ab-slider">
+      <svg
+        id="ab-sun"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <circle cx="12" cy="12" r="4" />
+        <path
+          d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+        />
+      </svg>
+      <div id="ab-track">
+        <div id="ab-handle"></div>
+      </div>
+      <div id="ab-moon">
+        <svg viewBox="0 0 24 24" fill="currentColor" stroke="none">
+          <path d="M9.528 1.718a.75.75 0 0 1 .162.819A8.97 8.97 0 0 0 9 6a9 9 0 0 0 9 9 8.97 8.97 0 0 0 3.463-.69.75.75 0 0 1 .981.98 10.503 10.503 0 0 1-9.694 6.46C6.951 21.75 2.25 17.05 2.25 11.25c0-4.368 2.667-8.112 6.46-9.694a.75.75 0 0 1 .818.162Z" />
+        </svg>
+      </div>
+    </div>
+
+    <div id="loader"><span></span><span></span><span></span></div>
+
+    <!-- AI dock -->
+    <div id="ai-dock">
+      <div id="ai-trigger-btn" onclick="aiTogglePanel()" tabindex="-1">
+        <svg
+          viewBox="0 0 24 24"
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path
+            d="M12 2a4 4 0 0 1 4 4v1h1a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3v-7a3 3 0 0 1 3-3h1V6a4 4 0 0 1 4-4z"
+          />
+          <circle cx="9" cy="14" r="1" fill="currentColor" stroke="none" />
+          <circle cx="15" cy="14" r="1" fill="currentColor" stroke="none" />
+          <path d="M9 18h6" />
+        </svg>
+        <span>IA</span>
+      </div>
+      <div
+        id="ai-voice-btn"
+        onclick="neoLiveToggle()"
+        tabindex="-1"
+        title="Talk to the AI"
+      >
+        <span id="ai-voice-pulse-ring"></span>
+        <svg
+          viewBox="0 0 24 24"
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z" />
+          <path d="M19 10v1a7 7 0 0 1-14 0v-1" />
+          <line x1="12" y1="18" x2="12" y2="22" />
+        </svg>
+      </div>
+      <div id="gallery-btn" onclick="galleryToggle()" tabindex="-1" title="Gallery">
+        <svg
+          viewBox="0 0 24 24"
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <rect x="3" y="3" width="18" height="18" rx="2" />
+          <circle cx="8.5" cy="8.5" r="1.5" fill="currentColor" stroke="none" />
+          <path d="M21 15l-5-5L5 21" />
+        </svg>
+        <span id="gallery-btn-badge"></span>
+      </div>
+    </div>
+
+    <!-- GALLERY — every AI-generated image lands here for review/download -->
+    <div id="gallery-modal">
+      <div id="gallery-card">
+        <div id="gallery-header">
+          <div>
+            <div id="gallery-title">Gallery</div>
+            <div id="gallery-sub">Every image you generate lands here.</div>
+          </div>
+          <div id="gallery-close" onclick="galleryToggle()" tabindex="-1">
+            <svg viewBox="0 0 10 10">
+              <line x1="2" y1="2" x2="8" y2="8" />
+              <line x1="8" y1="2" x2="2" y2="8" />
+            </svg>
+          </div>
+        </div>
+        <div id="gallery-grid"></div>
+      </div>
+    </div>
+
+    <!-- AI PANEL -->
+    <div id="ai-panel">
+      <div id="ai-panel-header">
+        <div id="ai-panel-title">AI Studio</div>
+        <div id="ai-panel-close" onclick="aiTogglePanel()" tabindex="-1">
+          <svg viewBox="0 0 10 10">
+            <line x1="2" y1="2" x2="8" y2="8" />
+            <line x1="8" y1="2" x2="2" y2="8" />
+          </svg>
+        </div>
+      </div>
+      <div id="ai-tabbar">
+        <button
+          class="ai-tab-btn active"
+          data-tab="image"
+          onclick="aiSwitchTab('image')"
+        >
+          🖼️ Image
+        </button>
+        <button
+          class="ai-tab-btn"
+          data-tab="video"
+          onclick="aiSwitchTab('video')"
+        >
+          🎬 Video
+        </button>
+      </div>
+      <div id="ai-panel-body">
+        <div class="ai-field" id="ai-key-field">
+          <label class="ai-lbl">API Key</label>
+          <input
+            type="password"
+            id="ai-key"
+            placeholder="Enter API Key"
+            autocomplete="off"
+            spellcheck="false"
+          />
+        </div>
+
+        <!-- TAB: IMAGE -->
+        <div class="ai-tab-panel active" id="ai-tab-image">
+          <div class="ai-tab-col">
+            <div class="ai-field">
+              <label
+                class="ai-lbl"
+                style="display: flex; align-items: center; gap: 6px"
+              >
+                <span>Style instruction</span>
+                <span
+                  style="
+                    font-size: 9px;
+                    letter-spacing: 0.06em;
+                    color: rgba(255, 255, 255, 0.4);
+                    font-weight: 500;
+                    text-transform: none;
+                  "
+                  >• uses current view as reference</span
+                >
+              </label>
+              <textarea
+                id="ai-img-prompt"
+                placeholder="Optional if you captured the view — e.g. golden hour lighting, luxury real estate..."
+              ></textarea>
+            </div>
+            <div class="ai-field">
+              <label class="ai-lbl">Aspect Ratio</label>
+              <select id="ai-img-ratio">
+                <option value="16:9" selected>16:9 — Widescreen</option>
+                <option value="9:16">9:16 — Vertical</option>
+                <option value="1:1">1:1 — Square</option>
+                <option value="4:3">4:3 — Standard</option>
+                <option value="3:4">3:4 — Portrait</option>
+              </select>
+            </div>
+            <div class="ai-capture-row">
+              <button class="ai-capture-btn" onclick="aiManualCapture()">
+                📷 Capture View
+              </button>
+              <div class="ai-capture-thumb" id="ai-img-capture-thumb">
+                No capture
+              </div>
+            </div>
+            <button
+              class="ai-generate-btn"
+              id="ai-img-generate-btn"
+              onclick="aiGenerate()"
+            >
+              Generate Image
+            </button>
+            <div class="ai-status" id="ai-img-status"></div>
+          </div>
+          <div class="ai-tab-col">
+            <div id="ai-img-wrap">
+              <img
+                id="ai-result-img"
+                alt=""
+                onclick="aiOpenLightbox()"
+                title="Click to enlarge"
+              />
+              <div id="ai-img-zoom-hint">🔍</div>
+              <button
+                class="ai-result-close"
+                onclick="aiCloseImage()"
+                title="Close"
+              >
+                <svg viewBox="0 0 10 10">
+                  <line x1="1" y1="1" x2="9" y2="9" />
+                  <line x1="9" y1="1" x2="1" y2="9" />
+                </svg>
+              </button>
+            </div>
+            <div class="ai-result-placeholder" id="ai-img-placeholder">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <circle cx="9" cy="9" r="1.5" />
+                <path d="M21 15l-5-5L5 21" />
+              </svg>
+            </div>
+            <button class="ai-dl-btn" id="ai-img-dl-btn" onclick="aiDownload()">
+              Download Image
+            </button>
+          </div>
+        </div>
+
+        <!-- TAB: VIDEO -->
+        <div class="ai-tab-panel" id="ai-tab-video">
+          <div class="ai-tab-col">
+            <div class="ai-field">
+              <label
+                class="ai-lbl"
+                style="display: flex; align-items: center; gap: 6px"
+              >
+                <span>Describe the video scene</span>
+                <span
+                  style="
+                    font-size: 9px;
+                    letter-spacing: 0.06em;
+                    color: rgba(255, 255, 255, 0.4);
+                    font-weight: 500;
+                    text-transform: none;
+                  "
+                  >• Veo 3.1</span
+                >
+              </label>
+              <textarea
+                id="ai-vid-prompt"
+                placeholder="Cinematic drone shot slowly pushing forward over the pool at golden hour..."
+              ></textarea>
+            </div>
+            <div class="ai-field">
+              <label class="ai-lbl">Aspect Ratio</label>
+              <select id="ai-vid-ratio">
+                <option value="16:9" selected>16:9 — Widescreen</option>
+                <option value="9:16">9:16 — Vertical</option>
+              </select>
+            </div>
+            <div class="ai-lbl">Animate from</div>
+            <div class="ai-row">
+              <button
+                class="ai-capture-btn"
+                data-src="capture"
+                onclick="aiSetVideoSource('capture')"
+              >
+                📷 Current View
+              </button>
+              <button
+                class="ai-capture-btn"
+                data-src="generated"
+                onclick="aiSetVideoSource('generated')"
+              >
+                🖼️ Generated Image
+              </button>
+            </div>
+            <div class="ai-capture-thumb" id="ai-vid-capture-thumb">
+              No image — text-only video
+            </div>
+            <button
+              class="ai-generate-btn"
+              id="ai-vid-generate-btn"
+              onclick="aiGenerateVideo()"
+            >
+              Generate Video
+            </button>
+            <div class="ai-status" id="ai-vid-status">
+              Video generation takes 1 to 3 minutes.
+            </div>
+          </div>
+          <div class="ai-tab-col">
+            <div id="ai-vid-wrap">
+              <video id="ai-result-video" controls playsinline></video>
+              <button
+                class="ai-result-close"
+                onclick="aiCloseVideo()"
+                title="Close"
+              >
+                <svg viewBox="0 0 10 10">
+                  <line x1="1" y1="1" x2="9" y2="9" />
+                  <line x1="9" y1="1" x2="1" y2="9" />
+                </svg>
+              </button>
+            </div>
+            <div class="ai-result-placeholder" id="ai-vid-placeholder">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="2.5" y="5" width="14" height="14" rx="2" />
+                <path d="M16.5 10l5-3v10l-5-3" />
+              </svg>
+            </div>
+            <button
+              class="ai-dl-btn"
+              id="ai-vid-dl-btn"
+              onclick="aiDownloadVideo()"
+            >
+              Download Video
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lightbox — enlarge generated image -->
+    <div id="ai-lightbox" onclick="aiCloseLightbox()">
+      <button id="ai-lightbox-close" onclick="aiCloseLightbox()" title="Close">
+        <svg viewBox="0 0 14 14">
+          <line x1="2" y1="2" x2="12" y2="12" />
+          <line x1="12" y1="2" x2="2" y2="12" />
+        </svg>
+      </button>
+      <img id="ai-lightbox-img" alt="" />
+    </div>
+
+    <!-- SHOP AI PLACEMENT MODAL — simulate one product in the scene -->
+    <div id="shop-place-modal">
+      <div id="shop-place-card">
+        <div id="shop-place-header">
+          <div>
+            <div id="shop-place-title">Visualize in your scene</div>
+            <div id="shop-place-sub">AI — uses your API key from the AI panel</div>
+          </div>
+          <div id="shop-place-close" onclick="shopPlaceClose()" tabindex="-1">
+            <svg viewBox="0 0 10 10">
+              <line x1="2" y1="2" x2="8" y2="8" />
+              <line x1="8" y1="2" x2="2" y2="8" />
+            </svg>
+          </div>
+        </div>
+        <div id="shop-place-body">
+          <div id="shop-place-product">
+            <img id="shop-place-img" alt="" />
+            <div id="shop-place-product-info">
+              <div id="shop-place-name"></div>
+              <div id="shop-place-variant"></div>
+            </div>
+            <div id="shop-place-price"></div>
+          </div>
+          <div class="shop-ai-row">
+            <button class="ai-capture-btn" id="shop-ai-capture-btn" onclick="shopOrderCapture()">
+              📷 Capture scene
+            </button>
+            <div class="ai-capture-thumb" id="shop-ai-capture-thumb">No capture</div>
+          </div>
+          <textarea
+            id="shop-ai-prompt"
+            placeholder="e.g. replace the existing sofa with this one, keep everything else the same..."
+          ></textarea>
+          <button class="ai-generate-btn" id="shop-ai-generate-btn" onclick="shopAiGenerate()">
+            Place furniture in scene
+          </button>
+          <div class="ai-status" id="shop-ai-status"></div>
+          <div id="shop-ai-result">
+            <img id="shop-ai-result-img" alt="" onclick="shopAiOpenResult()" title="Click to enlarge" />
+            <div id="shop-ai-img-zoom-hint" onclick="shopAiOpenResult()" title="Expand">🔍</div>
+          </div>
+          <button class="ai-dl-btn" id="shop-ai-dl-btn" onclick="shopAiDownload()">
+            Download image
+          </button>
+
+          <div id="shop-ai-video-divider"></div>
+          <button class="ai-generate-btn" id="shop-ai-video-btn" onclick="shopAiGenerateVideo()">
+            🎬 Generate video
+          </button>
+          <div class="ai-status" id="shop-ai-video-status">Animates the generated image (or the capture). Takes 1 to 3 minutes.</div>
+          <div id="shop-ai-video-result">
+            <video id="shop-ai-video" controls playsinline loop></video>
+          </div>
+          <button class="ai-dl-btn" id="shop-ai-video-dl-btn" onclick="shopAiDownloadVideo()">
+            Download video
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+        }
+      }
+    </script>
+    <script src="scenes-fp.js"></script>
+    <script src="script-fp.js"></script>
+    <script src="shop.js?v=5"></script>
+    <script type="module" src="shop3d.js?v=5"></script>
+  </body>
+</html>
