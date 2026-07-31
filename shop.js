@@ -239,6 +239,13 @@ function shopRenderGrid() {
             <path d="M12 22V12M12 12L3.5 7M12 12l8.5-5"/>
           </svg>
           <span>3D</span>
+        </button>
+        <button class="shop-ar-btn" title="Vedi nel tuo spazio (realtà aumentata)" onclick="event.stopPropagation();shopArOpen('${p.id}')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 7V5a2 2 0 012-2h2M17 3h2a2 2 0 012 2v2M21 17v2a2 2 0 01-2 2h-2M7 21H5a2 2 0 01-2-2v-2"/>
+            <path d="M12 8l3.5 2v4L12 16l-3.5-2v-4L12 8z"/>
+          </svg>
+          <span>AR</span>
         </button>`}
         ${inCart ? '<div class="shop-card-check">✓</div>' : ""}
       </div>
@@ -261,6 +268,13 @@ function shopRenderGrid() {
               <path d="M12 22V12M12 12L3.5 7M12 12l8.5-5"/>
             </svg>
             <span>3D</span>
+          </button>
+          <button class="shop-quick-ar-btn" title="Vedi nel tuo spazio (realtà aumentata)" onclick="event.stopPropagation();shopArOpen('${p.id}')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 7V5a2 2 0 012-2h2M17 3h2a2 2 0 012 2v2M21 17v2a2 2 0 01-2 2h-2M7 21H5a2 2 0 01-2-2v-2"/>
+              <path d="M12 8l3.5 2v4L12 16l-3.5-2v-4L12 8z"/>
+            </svg>
+            <span>AR</span>
           </button>`}
         </div>
         <div class="shop-card-footer">
@@ -321,6 +335,48 @@ function shopPreloadModels() {
   const run = () => SHOP_PRODUCTS.forEach(p => window.Shop3D.preload(p, SHOP_FALLBACK_MODELS));
   window.requestIdleCallback ? requestIdleCallback(run, { timeout: 3000 }) : setTimeout(run, 800);
 }
+
+/* ── AR viewer (model-viewer: WebXR / Scene Viewer / Quick Look) ──
+   Android+Chrome opens the real camera and anchors the GLB on the floor.
+   iPhone needs a .usdz version of the model (optional `usdz` field on the
+   product) for Quick Look — without it, iOS falls back to the 3D orbit view.
+   Desktop has no browser AR: shows the 3D preview + a hint to open on phone. */
+function shopArOpen(id) {
+  const p = shopProduct(id);
+  const viewer = document.getElementById("shop-ar-viewer");
+  if (!p || !viewer) return;
+  viewer.dataset.fallbackTried = "";
+  if (p.usdz) viewer.setAttribute("ios-src", p.usdz);
+  else viewer.removeAttribute("ios-src");
+  viewer.alt = `${p.name} — ${p.variant}`;
+  viewer.src = p.model;
+  document.getElementById("shop-ar-name").textContent = p.name;
+  document.getElementById("shop-ar-variant").textContent = p.variant;
+  document.getElementById("shop-ar-price").textContent = shopFmt(p.price);
+  document.getElementById("shop-ar-modal").classList.add("open");
+  /* canActivateAR is only reliable once model-viewer has evaluated the src —
+     wait a frame, then adapt the hint to what this device can actually do. */
+  requestAnimationFrame(() => {
+    const hint = document.getElementById("shop-ar-hint");
+    hint.textContent = viewer.canActivateAR
+      ? 'Tocca "Vedi in AR" e inquadra il pavimento con la fotocamera.'
+      : "AR disponibile da smartphone (Android / iPhone) — su questo dispositivo puoi ruotare il modello in 3D.";
+  });
+}
+function shopArClose() {
+  document.getElementById("shop-ar-modal")?.classList.remove("open");
+}
+/* If the product GLB isn't in the repo yet, fall back to the same public
+   demo model used by Shop3D — mirrors the shop3d.js behaviour. */
+(function shopArInit() {
+  const viewer = document.getElementById("shop-ar-viewer");
+  if (!viewer) return;
+  viewer.addEventListener("error", () => {
+    if (viewer.dataset.fallbackTried) return;
+    viewer.dataset.fallbackTried = "1";
+    viewer.src = SHOP_FALLBACK_MODELS[0];
+  });
+})();
 
 /* ── Order summary modal ── */
 function shopOpenOrder() {
@@ -660,9 +716,15 @@ function shopDragStart(e, id) {
   if (!p) return;
   e.dataTransfer.setData("text/plain", id);
   e.dataTransfer.effectAllowed = "copy";
-  const img = e.currentTarget.querySelector("img");
-  if (img) e.dataTransfer.setDragImage(img, img.width / 2, img.height / 2);
-  e.currentTarget.closest(".shop-card")?.classList.add("dragging");
+  const card = e.currentTarget.closest(".shop-card");
+  if (card) {
+    /* Drag the whole card (not just the <img>) so the ghost the browser
+       shows under the cursor is the full product card, not a tiny/partial
+       snapshot — matters especially if the image is still lazy-loading. */
+    const rect = card.getBoundingClientRect();
+    e.dataTransfer.setDragImage(card, e.clientX - rect.left, e.clientY - rect.top);
+    card.classList.add("dragging");
+  }
   document.body.classList.add("shop-card-dragging");
 }
 function shopDragEnd(e) {
@@ -695,5 +757,6 @@ document.addEventListener("keydown", e => {
   if (window.Shop3D) window.Shop3D.close();
   shopPlaceClose();
   shopCloseOrder();
+  shopArClose();
 });
 shopUpdateTotals();

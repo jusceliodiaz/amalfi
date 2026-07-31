@@ -31,6 +31,20 @@ Capture scene → prompt → Place furniture in scene.
 Envia screenshot da cena + foto do produto + instrução pros modelos
 gemini-3.1-flash-image / gemini-3-pro-image. Não precisa estar no carrinho.
 
+## AR (vedi nel tuo spazio)
+Cada card (exceto pavimentos) tem um botão **AR** que abre um modal com
+`<model-viewer>` (Google, via CDN) mostrando o GLB do produto.
+- **Android + Chrome**: botão "Vedi in AR" abre a câmera e ancora o modelo
+  no chão (Scene Viewer/WebXR), escala real.
+- **iPhone**: o Quick Look exige `.usdz`. Adicione um campo `usdz: "assets/models/<id>.usdz"`
+  no produto em `SHOP_PRODUCTS` e solte o arquivo na pasta — o código já suporta.
+  Sem o .usdz, o iPhone mostra só o preview 3D orbital.
+- **Desktop**: sem AR no navegador — mostra preview 3D + aviso pra abrir no celular.
+O botão AR nativo do model-viewer só aparece quando o dispositivo suporta AR.
+Se o GLB do produto não existir, cai no mesmo modelo demo do viewer 3D.
+Importante: o GLB precisa estar em **escala real (metros)** pro AR mostrar o
+tamanho certo do móvel.
+
 ## Observação
 O carrinho persiste em localStorage (chave `archviz-shop-cart`).
 Requer servidor local (não abrir via file://) por causa dos módulos ES do Three.js.

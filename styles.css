@@ -1445,7 +1445,7 @@ html, body {
   flex-shrink: 0;
 }
 .shop-card.selected { border-color: var(--warm); }
-.shop-card.dragging { opacity: 0.35; }
+.shop-card.dragging { border-color: var(--warm); box-shadow: 0 0 0 2px var(--warm); }
 .shop-card-imgwrap {
   position: relative;
   width: 100%;
@@ -2195,3 +2195,166 @@ html, body {
 }
 #shop-tabbar { flex-wrap: nowrap; }
 .shop-tab-btn { padding: 9px 4px; font-size: 10px; letter-spacing: 0.07em; }
+
+/* ── AR (model-viewer) — card button + modal ── */
+/* Overlay button on the card thumbnail, stacked above the 3D one. */
+.shop-ar-btn {
+  position: absolute;
+  bottom: 40px; right: 8px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(20, 19, 15, 0.85);
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: none;
+  transition: background 0.2s, transform 0.2s;
+}
+.shop-ar-btn:hover { background: var(--warm); color: #14130f; transform: scale(1.05); }
+.shop-ar-btn svg { width: 14px; height: 14px; }
+@media (hover: none) { .shop-ar-btn { cursor: pointer; } }
+@media (max-width: 480px) {
+  .shop-ar-btn { display: none; }
+  .shop-quick-ar-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 84px;
+    padding: 8px 0;
+    border-radius: 8px;
+    border: 1px solid rgba(20, 19, 15, 0.25);
+    background: rgba(20, 19, 15, 0.05);
+    color: rgba(20, 19, 15, 0.8);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+  }
+  .shop-quick-ar-btn svg { width: 13px; height: 13px; }
+}
+
+#shop-ar-modal {
+  position: fixed; inset: 0; z-index: 207;
+  display: none;
+  align-items: center; justify-content: center;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 18px;
+}
+#shop-ar-modal.open {
+  display: flex;
+  animation: shopPlaceZoomIn 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+#shop-ar-card {
+  width: min(480px, 100%);
+  max-height: min(90vh, 100%);
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  overflow: hidden;
+  background: rgba(250, 248, 244, 0.97);
+  border: 1px solid rgba(20, 19, 15, 0.12);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.35);
+  color: #26241d;
+  font-family: 'DM Sans', sans-serif;
+}
+#shop-ar-header {
+  padding: 18px 20px 14px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(20, 19, 15, 0.1);
+}
+#shop-ar-title {
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--warm);
+}
+#shop-ar-sub {
+  font-size: 11px;
+  color: rgba(20, 19, 15, 0.55);
+  margin-top: 3px;
+}
+#shop-ar-close {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: rgba(20, 19, 15, 0.06);
+  border: 1px solid rgba(20, 19, 15, 0.14);
+  display: flex; align-items: center; justify-content: center;
+  cursor: none;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+#shop-ar-close:hover { background: rgba(20, 19, 15, 0.14); }
+#shop-ar-close svg { width: 10px; height: 10px; stroke: #14130f; fill: none; stroke-width: 2; stroke-linecap: round; }
+@media (hover: none) { #shop-ar-close { cursor: pointer; } }
+#shop-ar-viewer {
+  width: 100%;
+  height: min(52vh, 380px);
+  background: rgba(20, 19, 15, 0.05);
+  --poster-color: transparent;
+}
+/* model-viewer's built-in AR button slot — only rendered by the component
+   when the device can actually launch AR (Scene Viewer / WebXR / Quick Look). */
+#shop-ar-launch {
+  position: absolute;
+  bottom: 14px; left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 11px 20px;
+  border-radius: 999px;
+  border: none;
+  background: var(--warm);
+  color: #14130f;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+#shop-ar-launch svg { width: 16px; height: 16px; }
+#shop-ar-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px 20px 4px;
+}
+#shop-ar-name {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #14130f;
+}
+#shop-ar-variant {
+  font-size: 11.5px;
+  color: rgba(20, 19, 15, 0.62);
+  margin-top: 2px;
+  line-height: 1.35;
+}
+#shop-ar-price {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--warm);
+  white-space: nowrap;
+}
+#shop-ar-hint {
+  padding: 8px 20px 18px;
+  font-size: 11px;
+  color: rgba(20, 19, 15, 0.55);
+  line-height: 1.45;
+}

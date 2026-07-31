@@ -107,7 +107,7 @@
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Cormorant+Garamond:wght@400;500;600&display=swap"
     /></noscript>
-    <link rel="stylesheet" href="styles.css?v=6" />
+    <link rel="stylesheet" href="styles.css?v=7" />
   </head>
   <body>
     <div id="preloader">
@@ -662,6 +662,52 @@
       </div>
     </div>
 
+    <!-- SHOP AR MODAL — view the product in your space (model-viewer / WebXR) -->
+    <div id="shop-ar-modal" onclick="if(event.target===this)shopArClose()">
+      <div id="shop-ar-card">
+        <div id="shop-ar-header">
+          <div>
+            <div id="shop-ar-title">Vedi nel tuo spazio</div>
+            <div id="shop-ar-sub">Realtà aumentata — con la fotocamera del telefono</div>
+          </div>
+          <div id="shop-ar-close" onclick="shopArClose()" tabindex="-1">
+            <svg viewBox="0 0 10 10">
+              <line x1="2" y1="2" x2="8" y2="8" />
+              <line x1="8" y1="2" x2="2" y2="8" />
+            </svg>
+          </div>
+        </div>
+        <model-viewer
+          id="shop-ar-viewer"
+          camera-controls
+          auto-rotate
+          shadow-intensity="1"
+          exposure="1"
+          ar
+          ar-modes="webxr scene-viewer quick-look"
+          ar-scale="auto"
+          loading="eager"
+        >
+          <button slot="ar-button" id="shop-ar-launch">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 7V5a2 2 0 012-2h2M17 3h2a2 2 0 012 2v2M21 17v2a2 2 0 01-2 2h-2M7 21H5a2 2 0 01-2-2v-2"/>
+              <path d="M12 8l3.5 2v4L12 16l-3.5-2v-4L12 8z"/>
+            </svg>
+            Vedi in AR
+          </button>
+          <div slot="progress-bar"></div>
+        </model-viewer>
+        <div id="shop-ar-info">
+          <div>
+            <div id="shop-ar-name"></div>
+            <div id="shop-ar-variant"></div>
+          </div>
+          <div id="shop-ar-price"></div>
+        </div>
+        <div id="shop-ar-hint"></div>
+      </div>
+    </div>
+
     <script type="importmap">
       {
         "imports": {
@@ -670,9 +716,12 @@
         }
       }
     </script>
+    <!-- model-viewer: AR nativo (WebXR / Scene Viewer / Quick Look) — unica via
+         pratica pra AR no browser; web component autocontido, sem build step. -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
     <script src="scenes-fp.js"></script>
     <script src="script-fp.js"></script>
-    <script src="shop.js?v=6"></script>
+    <script src="shop.js?v=7"></script>
     <script type="module" src="shop3d.js?v=6"></script>
   </body>
 </html>
