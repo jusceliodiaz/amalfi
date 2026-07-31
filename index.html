@@ -708,6 +708,23 @@
       </div>
     </div>
 
+    <!-- PANO 360° MODAL — equirectangular panorama viewer, opened from a POI -->
+    <div id="pano-modal" aria-hidden="true">
+      <div id="pano-modal-backdrop"></div>
+      <div id="pano-modal-box">
+        <button id="pano-modal-close" title="Chiudi">✕</button>
+        <div id="pano-modal-badge">360°</div>
+        <div id="pano-room-label"></div>
+        <canvas id="pano-canvas"></canvas>
+        <div id="pano-hotspots"></div>
+        <div id="pano-hint">Trascina per esplorare · Scorri per zoom</div>
+        <div id="pano-loading">
+          <div id="pano-spinner"></div>
+          Caricamento...
+        </div>
+      </div>
+    </div>
+
     <script type="importmap">
       {
         "imports": {
@@ -723,5 +740,6 @@
     <script src="script-fp.js"></script>
     <script src="shop.js?v=7"></script>
     <script type="module" src="shop3d.js?v=6"></script>
+    <script type="module" src="pano360.js?v=1"></script>
   </body>
 </html>

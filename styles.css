@@ -276,6 +276,13 @@ html, body {
   background: rgba(20,20,20,.75);
   border-radius: 2px;
 }
+/* 360° POI — swaps the generic +-cross icon for the orbit svg passed in
+   via JS (renderPOIs), tinted with the brand green. */
+.poi--pano .poi-btn::before, .poi--pano .poi-btn::after { display: none; }
+.poi--pano .poi-btn svg {
+  width: 16px; height: 16px;
+  color: var(--warm);
+}
 .poi-btn::before { width: 10px; height: 1.5px; }
 .poi-btn::after  { width: 1.5px; height: 10px; }
 
@@ -2357,4 +2364,159 @@ html, body {
   font-size: 11px;
   color: rgba(20, 19, 15, 0.55);
   line-height: 1.45;
+}
+
+/* ══════════════════════════════════════════════════════
+   PANO 360° — equirectangular viewer modal, opened from a POI.
+   Chrome (badge/hint/close/label) floats over the photo itself, so it
+   stays a translucent frosted overlay regardless of theme — same logic
+   as the shop's AI/3D badges over product photos.
+   ══════════════════════════════════════════════════════ */
+#pano-modal {
+  position: fixed; inset: 0; z-index: 220;
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+#pano-modal.open { opacity: 1; pointer-events: auto; }
+#pano-modal-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  cursor: pointer;
+}
+#pano-modal-box {
+  position: relative;
+  width: min(96vw, 1440px);
+  height: min(92vh, 900px);
+  border-radius: 20px;
+  overflow: hidden;
+  background: #e9e1d0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.5);
+  transform: scale(0.93);
+  transition: transform 0.4s ease;
+}
+#pano-modal.open #pano-modal-box { transform: scale(1); }
+#pano-modal-close {
+  position: absolute; top: 16px; right: 16px; z-index: 10;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  color: #14130f;
+  cursor: pointer;
+  font-size: 13px;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+}
+#pano-modal-close:hover { background: #fff; }
+#pano-modal-badge {
+  position: absolute; top: 16px; left: 16px; z-index: 10;
+  padding: 5px 13px;
+  border-radius: 20px;
+  background: var(--warm);
+  color: #14130f;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+#pano-canvas {
+  width: 100%; height: 100%;
+  display: block;
+  cursor: grab;
+  touch-action: none;
+}
+#pano-canvas:active { cursor: grabbing; }
+#pano-hint {
+  position: absolute;
+  bottom: 20px; left: 50%;
+  transform: translateX(-50%);
+  padding: 7px 16px;
+  border-radius: 20px;
+  background: rgba(20, 19, 15, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #fff;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  pointer-events: none;
+  white-space: nowrap;
+  transition: opacity 0.5s;
+}
+#pano-hint.hidden { opacity: 0; }
+#pano-loading {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  background: #e9e1d0;
+  color: rgba(20, 19, 15, 0.5);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: opacity 0.4s;
+}
+#pano-loading.hidden { opacity: 0; pointer-events: none; }
+#pano-spinner {
+  width: 28px; height: 28px;
+  border: 2px solid rgba(20, 19, 15, 0.12);
+  border-top-color: var(--warm);
+  border-radius: 50%;
+  animation: panoSpin 0.8s linear infinite;
+}
+@keyframes panoSpin { to { transform: rotate(360deg); } }
+#pano-room-label {
+  position: absolute; top: 16px; left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.85);
+  color: #14130f;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 6px 18px;
+  border-radius: 20px;
+  pointer-events: none;
+  z-index: 10;
+  white-space: nowrap;
+}
+#pano-hotspots { position: absolute; inset: 0; pointer-events: none; z-index: 5; }
+.pano-hotspot {
+  position: absolute;
+  pointer-events: auto;
+  transform: translate(-50%, -50%);
+  display: flex; flex-direction: column; align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+.pano-hotspot-dot {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--warm);
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  display: flex; align-items: center; justify-content: center;
+  color: #14130f;
+  transition: transform 0.2s ease;
+}
+.pano-hotspot:hover .pano-hotspot-dot { transform: scale(1.15); }
+.pano-hotspot-label {
+  background: rgba(255, 255, 255, 0.85);
+  color: #14130f;
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 11px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+@media (max-width: 600px) {
+  #pano-modal-box { width: 100vw; height: 100vh; border-radius: 0; }
 }
