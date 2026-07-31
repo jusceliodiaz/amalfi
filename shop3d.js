@@ -147,7 +147,7 @@ const Shop3D = {
     } catch (e) {
       if (gen !== openGen) return;
       spinner.classList.remove("visible");
-      titleEl.textContent = product.name + " — 3D model not found (add " + product.model + ")";
+      titleEl.textContent = product.name + " — modello 3D non trovato (aggiungi " + product.model + ")";
       console.error("Shop3D:", e);
     }
   },

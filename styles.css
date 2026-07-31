@@ -910,17 +910,18 @@ html, body {
   z-index: 70;
   width: 720px;
   max-width: 94vw;
-  background: rgba(120, 130, 140, 0.55);
+  background: rgba(250, 248, 244, 0.97);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(20, 19, 15, 0.12);
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
   opacity: 0;
   pointer-events: none;
   transform: translate(-50%, -50%) scale(0.97);
   transition: opacity 0.3s ease, transform 0.3s var(--ease);
+  color: #26241d;
 }
 #ai-panel.open {
   opacity: 1;
@@ -929,13 +930,13 @@ html, body {
 }
 #ai-panel.dragging {
   transition: none;
-  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.35);
 }
 #ai-panel input, #ai-panel textarea { user-select: text; -webkit-user-select: text; }
 
 #ai-panel-header {
   padding: 14px 18px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  border-bottom: 1px solid rgba(20, 19, 15, 0.1);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -944,7 +945,7 @@ html, body {
 }
 #ai-panel-header:active { cursor: grabbing; }
 #ai-panel-title {
-  color: #fff;
+  color: #14130f;
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -953,16 +954,16 @@ html, body {
 #ai-panel-close {
   width: 24px; height: 24px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(20, 19, 15, 0.06);
+  border: 1px solid rgba(20, 19, 15, 0.14);
   display: flex; align-items: center; justify-content: center;
   cursor: none;
   transition: background 0.2s;
 }
-#ai-panel-close:hover { background: rgba(255, 255, 255, 0.22); }
+#ai-panel-close:hover { background: rgba(20, 19, 15, 0.14); }
 #ai-panel-close svg {
   width: 10px; height: 10px;
-  stroke: #fff;
+  stroke: #14130f;
   fill: none; stroke-width: 2; stroke-linecap: round;
 }
 
@@ -970,10 +971,10 @@ html, body {
 .ai-tab-btn {
   flex: 1;
   padding: 8px 6px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(20, 19, 15, 0.12);
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.6);
+  background: rgba(20, 19, 15, 0.035);
+  color: rgba(20, 19, 15, 0.55);
   font-family: 'DM Sans', sans-serif;
   font-size: 11px;
   font-weight: 600;
@@ -981,11 +982,11 @@ html, body {
   transition: background 0.2s, color 0.2s;
   white-space: nowrap;
 }
-.ai-tab-btn:hover { background: rgba(255, 255, 255, 0.14); }
+.ai-tab-btn:hover { background: rgba(20, 19, 15, 0.08); }
 .ai-tab-btn.active {
-  background: #fff;
-  border-color: #fff;
-  color: #111;
+  background: var(--warm);
+  border-color: var(--warm);
+  color: #14130f;
 }
 .ai-tab-panel { display: none; }
 .ai-tab-panel.active { display: contents; }
@@ -1006,17 +1007,17 @@ html, body {
 .ai-field { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
 .ai-lbl {
   font-size: 10px;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(20, 19, 15, 0.55);
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
 .ai-field input, .ai-field select, .ai-field textarea {
   width: 100%; min-width: 0; box-sizing: border-box;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(20, 19, 15, 0.05);
+  border: 1px solid rgba(20, 19, 15, 0.18);
   border-radius: 10px;
   padding: 9px 11px;
-  color: #fff;
+  color: #14130f;
   font-family: 'DM Sans', sans-serif;
   font-size: 13px;
   outline: none;
@@ -1025,11 +1026,11 @@ html, body {
   text-overflow: ellipsis;
 }
 .ai-field input:focus, .ai-field select:focus, .ai-field textarea:focus {
-  border-color: rgba(255, 255, 255, 0.4);
+  border-color: rgba(20, 19, 15, 0.4);
 }
-.ai-field input::placeholder, .ai-field textarea::placeholder { color: rgba(255, 255, 255, 0.35); }
+.ai-field input::placeholder, .ai-field textarea::placeholder { color: rgba(20, 19, 15, 0.38); }
 .ai-field textarea { resize: none; min-height: 80px; line-height: 1.5; }
-.ai-field select option { background: #4b525a; color: #fff; }
+.ai-field select option { background: #fff; color: #14130f; }
 
 .ai-generate-btn {
   width: 100%;
@@ -1051,7 +1052,7 @@ html, body {
 
 .ai-status {
   font-size: 11px;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(20, 19, 15, 0.6);
   text-align: center;
   min-height: 16px;
   max-height: 56px;
@@ -1065,9 +1066,9 @@ html, body {
   aspect-ratio: 16/9;
   border-radius: 12px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(20, 19, 15, 0.05);
   display: none;
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(20, 19, 15, 0.12);
   position: relative;
 }
 #ai-img-wrap.visible, #ai-vid-wrap.visible { display: block; }
@@ -1076,12 +1077,12 @@ html, body {
   width: 100%;
   aspect-ratio: 16/9;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(20, 19, 15, 0.05);
+  border: 1px solid rgba(20, 19, 15, 0.12);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(255, 255, 255, 0.25);
+  color: rgba(20, 19, 15, 0.28);
 }
 .ai-result-placeholder svg { width: 42px; height: 42px; }
 /* Hides itself once the real result (previous sibling) becomes visible —
@@ -1164,10 +1165,10 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(20, 19, 15, 0.05);
+  border: 1px solid rgba(20, 19, 15, 0.18);
   border-radius: 8px;
-  color: #fff;
+  color: #14130f;
   font-family: 'DM Sans', sans-serif;
   font-size: 11px;
   font-weight: 600;
@@ -1176,11 +1177,11 @@ html, body {
   transition: background 0.2s;
   white-space: nowrap;
 }
-.ai-capture-btn:hover { background: rgba(255, 255, 255, 0.16); }
+.ai-capture-btn:hover { background: rgba(20, 19, 15, 0.1); }
 .ai-capture-btn.active {
-  background: #fff;
-  border-color: #fff;
-  color: #111;
+  background: #14130f;
+  border-color: #14130f;
+  color: #fff;
 }
 .ai-capture-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 .ai-capture-thumb {
@@ -1188,12 +1189,12 @@ html, body {
   box-sizing: border-box;
   border-radius: 8px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(20, 19, 15, 0.04);
+  border: 1px solid rgba(20, 19, 15, 0.12);
   display: flex; align-items: center; justify-content: center;
   font-size: 9px;
   letter-spacing: 0.1em;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(20, 19, 15, 0.45);
   text-transform: uppercase;
 }
 .ai-capture-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -1201,10 +1202,10 @@ html, body {
 .ai-dl-btn {
   width: 100%;
   padding: 11px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(20, 19, 15, 0.2);
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
+  background: transparent;
+  color: #14130f;
   font-family: 'DM Sans', sans-serif;
   font-size: 12px;
   font-weight: 600;
@@ -1215,7 +1216,7 @@ html, body {
   text-transform: uppercase;
 }
 .ai-dl-btn.visible { display: block; }
-.ai-dl-btn:hover { background: rgba(255, 255, 255, 0.16); }
+.ai-dl-btn:hover { background: rgba(20, 19, 15, 0.08); }
 
 @media (max-width: 600px) {
   #ai-trigger-btn span { display: none; }
@@ -1500,6 +1501,8 @@ html, body {
   transition: background 0.2s, color 0.2s;
 }
 .shop-buy-link:hover { background: rgba(20, 19, 15, 0.1); color: #14130f; }
+.shop-buy-link--static { cursor: default; opacity: 0.7; }
+.shop-buy-link--static:hover { background: rgba(20, 19, 15, 0.04); color: rgba(20, 19, 15, 0.75); }
 .shop-buy-link svg { width: 11px; height: 11px; }
 .shop-add-btn {
   padding: 7px 14px;
@@ -2101,25 +2104,6 @@ html, body {
   color: var(--warm);
   white-space: nowrap;
 }
-/* .ai-capture-btn/.ai-capture-thumb are shared with the dark AI dock —
-   override here so they read on this modal's light background. */
-#shop-place-body .ai-capture-btn {
-  background: rgba(20, 19, 15, 0.05);
-  border-color: rgba(20, 19, 15, 0.18);
-  color: #14130f;
-}
-#shop-place-body .ai-capture-btn:hover { background: rgba(20, 19, 15, 0.1); }
-#shop-place-body .ai-capture-btn.active {
-  background: #14130f;
-  border-color: #14130f;
-  color: #fff;
-}
-#shop-place-body .ai-capture-thumb {
-  background: rgba(20, 19, 15, 0.04);
-  border-color: rgba(20, 19, 15, 0.12);
-  color: rgba(20, 19, 15, 0.5);
-}
-#shop-place-body .ai-status { color: rgba(20, 19, 15, 0.6); }
 @media (hover: none) {
   #shop-place-card button, #shop-place-close { cursor: pointer; }
 }
