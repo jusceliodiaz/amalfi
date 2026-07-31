@@ -519,6 +519,7 @@ async function shopAiGenerate() {
     document.getElementById("shop-ai-result-img").src = "data:image/png;base64," + imgB64;
     document.getElementById("shop-ai-result").classList.add("visible");
     document.getElementById("shop-ai-dl-btn").classList.add("visible");
+    galleryAdd(imgB64, "image/png", p.name);
     shopAiStatus("Done! " + p.name + " placed in your scene.");
   } catch (e) {
     console.error(e);
