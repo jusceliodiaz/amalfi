@@ -539,7 +539,12 @@ function shopAiDownload() {
 function shopAiOpenResult() {
   const src = document.getElementById("shop-ai-result-img").src;
   if (!src) return;
-  document.getElementById("ai-lightbox-img").src = src;
+  const v = document.getElementById("ai-lightbox-video");
+  v.pause();
+  v.classList.remove("open");
+  const img = document.getElementById("ai-lightbox-img");
+  img.src = src;
+  img.classList.add("open");
   document.getElementById("ai-lightbox").classList.add("open");
 }
 
@@ -620,6 +625,7 @@ async function shopAiGenerateVideo() {
     document.getElementById("shop-ai-video-result").classList.add("visible");
     document.getElementById("shop-ai-video-dl-btn").classList.add("visible");
     shopAiVideoStatus("Done! Video with " + p.name + " ready.");
+    galleryAddVideoBlob(blob, p.name + " video");
   } catch (e) {
     console.error(e);
     shopAiVideoStatus("Error: " + e.message);

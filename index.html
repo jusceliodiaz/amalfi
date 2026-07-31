@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en-GB">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta
@@ -9,32 +9,34 @@
     <title>Interactive Explorer | Factory Studio</title>
     <meta
       name="description"
-      content="Factory Studio — explore the development in 3D with immersive navigation between the facade, pool and leisure areas. High-end interactive archviz, directly in your browser."
+      content="Factory Studio — explore an exclusive Italian coastal property in 3D, with immersive navigation between the pool and terrace areas. High-end interactive archviz, directly in your browser."
     />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Factory Studio" />
     <meta
       name="keywords"
-      content="Factory Studio, interactive 3D tour, interactive archviz, 3D real estate visualization, immersive architecture experience, interactive exterior tour, virtual property tour Europe"
+      content="Factory Studio, Italy, Italian coast, Amalfi coast property, interactive 3D tour, interactive archviz, 3D real estate visualization Italy, immersive architecture experience, interactive exterior tour, virtual property tour Italy"
     />
+    <meta name="geo.region" content="IT" />
+    <meta name="geo.placename" content="Italy" />
     <meta property="og:type" content="website" />
     <meta
       property="og:title"
-      content="Interactive 3D Exterior Tour | Factory Studio"
+      content="Interactive 3D Exterior Tour | Italian Coastal Property"
     />
     <meta
       property="og:description"
-      content="Factory Studio — walk through the development before visiting the showroom. Immersive archviz tour featuring aerial and pool views."
+      content="Factory Studio — walk through this Italian coastal property before visiting the showroom. Immersive archviz tour featuring the pool and terrace views."
     />
     <meta
       property="og:image"
-      content="https://www.factorystudio.works/images/og_firstperson.jpg"
+      content="https://www.factorystudio.works/images/og-pool.jpg"
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta
       property="og:image:alt"
-      content="Interactive 3D exterior tour — Factory Studio"
+      content="Infinity pool overlooking the Italian coast — interactive 3D tour"
     />
     <meta
       property="og:url"
@@ -51,15 +53,15 @@
     <meta name="twitter:site" content="@weare.factory" />
     <meta
       name="twitter:title"
-      content="Interactive 3D Exterior Tour | Factory Studio"
+      content="Interactive 3D Exterior Tour | Italian Coastal Property"
     />
     <meta
       name="twitter:description"
-      content="Factory Studio — walk through the development before visiting the showroom. Immersive archviz tour featuring aerial and pool views."
+      content="Factory Studio — walk through this Italian coastal property before visiting the showroom. Immersive archviz tour featuring the pool and terrace views."
     />
     <meta
       name="twitter:image"
-      content="https://www.factorystudio.works/images/og_firstperson.jpg"
+      content="https://www.factorystudio.works/images/og-pool.jpg"
     />
     <!-- Google tag (gtag.js) — lazy-loaded after page load -->
     <script>
@@ -149,7 +151,7 @@
     <!-- SHOP PANEL — right drawer -->
     <div id="shop-panel">
       <div id="shop-panel-header">
-        <div id="shop-panel-title">Shop <span>IKEA Italia</span></div>
+        <div id="shop-panel-title">Shop <span>Parallelism</span></div>
         <div id="shop-panel-close" onclick="shopToggle()" tabindex="-1">
           <svg viewBox="0 0 10 10">
             <line x1="2" y1="2" x2="8" y2="8" />
@@ -323,13 +325,13 @@
       </div>
     </div>
 
-    <!-- GALLERY — every AI-generated image lands here for review/download -->
+    <!-- GALLERY — every AI-generated image/video lands here for review/download -->
     <div id="gallery-modal">
       <div id="gallery-card">
         <div id="gallery-header">
           <div>
             <div id="gallery-title">Gallery</div>
-            <div id="gallery-sub">Every image you generate lands here.</div>
+            <div id="gallery-sub">Every image and video you generate lands here.</div>
           </div>
           <div id="gallery-close" onclick="galleryToggle()" tabindex="-1">
             <svg viewBox="0 0 10 10">
@@ -584,6 +586,7 @@
         </svg>
       </button>
       <img id="ai-lightbox-img" alt="" />
+      <video id="ai-lightbox-video" controls playsinline loop onclick="event.stopPropagation()"></video>
     </div>
 
     <!-- SHOP AI PLACEMENT MODAL — simulate one product in the scene -->
