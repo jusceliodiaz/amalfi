@@ -217,7 +217,13 @@ function shopRenderGrid() {
     const inCart = shopState.cart.has(p.id);
     return `
     <div class="shop-card${inCart ? " selected" : ""}" data-id="${p.id}" data-cat="${p.cat}" onclick="shopToggleItem('${p.id}')">
-      <div class="shop-card-imgwrap">
+      <div
+        class="shop-card-imgwrap"
+        draggable="true"
+        title="Trascina nella scena per visualizzarlo con l'IA"
+        ondragstart="shopDragStart(event,'${p.id}')"
+        ondragend="shopDragEnd(event)"
+      >
         <img src="${p.img}" alt="${p.name} — ${p.variant}" loading="lazy" />
         <button class="shop-ai-btn" title="Posiziona nella tua scena con l'IA" onclick="event.stopPropagation();shopPlaceOpen('${p.id}')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
@@ -379,9 +385,12 @@ function shopAiActionLabels(cat) {
   return SHOP_AI_ACTION_LABELS[cat] || SHOP_AI_ACTION_DEFAULT;
 }
 
-function shopPlaceOpen(id) {
+function shopPlaceOpen(id, originX, originY) {
   const p = shopProduct(id);
   if (!p) return;
+  const modal = document.getElementById("shop-place-modal");
+  modal.style.setProperty("--drop-x", (originX != null ? originX : window.innerWidth / 2) + "px");
+  modal.style.setProperty("--drop-y", (originY != null ? originY : window.innerHeight / 2) + "px");
   document.getElementById("shop-ai-generate-btn").textContent = shopAiActionLabels(p.cat).button;
   if (shopState.placeId !== id) {
     /* New product — clear the previous results */
@@ -405,7 +414,7 @@ function shopPlaceOpen(id) {
   document.getElementById("shop-place-name").textContent = p.name;
   document.getElementById("shop-place-variant").textContent = p.variant;
   document.getElementById("shop-place-price").textContent = shopFmt(p.price);
-  document.getElementById("shop-place-modal").classList.add("open");
+  modal.classList.add("open");
 }
 function shopPlaceClose() {
   document.getElementById("shop-place-modal").classList.remove("open");
@@ -641,6 +650,43 @@ function shopAiDownloadVideo() {
   a.href = shopState.videoUrl;
   a.download = "scene-with-furniture.mp4";
   a.click();
+}
+
+/* ── Drag a product card onto the scene: drop = auto place + auto generate.
+   shopAiGenerate() already captures the scene itself if none was taken yet,
+   so this is just "open the modal at the drop point, then generate". ── */
+function shopDragStart(e, id) {
+  const p = shopProduct(id);
+  if (!p) return;
+  e.dataTransfer.setData("text/plain", id);
+  e.dataTransfer.effectAllowed = "copy";
+  const img = e.currentTarget.querySelector("img");
+  if (img) e.dataTransfer.setDragImage(img, img.width / 2, img.height / 2);
+  e.currentTarget.closest(".shop-card")?.classList.add("dragging");
+  document.body.classList.add("shop-card-dragging");
+}
+function shopDragEnd(e) {
+  e.currentTarget.closest(".shop-card")?.classList.remove("dragging");
+  document.body.classList.remove("shop-card-dragging");
+  document.getElementById("stage").classList.remove("drag-over");
+}
+function shopStageDragOver(e) {
+  if (!document.body.classList.contains("shop-card-dragging")) return;
+  e.preventDefault();
+  e.dataTransfer.dropEffect = "copy";
+  document.getElementById("stage").classList.add("drag-over");
+}
+function shopStageDragLeave(e) {
+  if (e.target === e.currentTarget) document.getElementById("stage").classList.remove("drag-over");
+}
+async function shopStageDrop(e) {
+  e.preventDefault();
+  document.getElementById("stage").classList.remove("drag-over");
+  document.body.classList.remove("shop-card-dragging");
+  const id = e.dataTransfer.getData("text/plain");
+  if (!id || !shopProduct(id)) return;
+  shopPlaceOpen(id, e.clientX, e.clientY);
+  await shopAiGenerate();
 }
 
 /* ── Init ── */
