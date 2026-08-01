@@ -217,13 +217,7 @@ function shopRenderGrid() {
     const inCart = shopState.cart.has(p.id);
     return `
     <div class="shop-card${inCart ? " selected" : ""}" data-id="${p.id}" data-cat="${p.cat}" onclick="shopToggleItem('${p.id}')">
-      <div
-        class="shop-card-imgwrap"
-        draggable="true"
-        title="Trascina nella scena per visualizzarlo con l'IA"
-        ondragstart="shopDragStart(event,'${p.id}')"
-        ondragend="shopDragEnd(event)"
-      >
+      <div class="shop-card-imgwrap">
         <img src="${p.img}" alt="${p.name} — ${p.variant}" loading="lazy" />
         <button class="shop-ai-btn" title="Posiziona nella tua scena con l'IA" onclick="event.stopPropagation();shopPlaceOpen('${p.id}')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
@@ -706,49 +700,6 @@ function shopAiDownloadVideo() {
   a.href = shopState.videoUrl;
   a.download = "scene-with-furniture.mp4";
   a.click();
-}
-
-/* ── Drag a product card onto the scene: drop = auto place + auto generate.
-   shopAiGenerate() already captures the scene itself if none was taken yet,
-   so this is just "open the modal at the drop point, then generate". ── */
-function shopDragStart(e, id) {
-  const p = shopProduct(id);
-  if (!p) return;
-  e.dataTransfer.setData("text/plain", id);
-  e.dataTransfer.effectAllowed = "copy";
-  const card = e.currentTarget.closest(".shop-card");
-  if (card) {
-    /* Drag the whole card (not just the <img>) so the ghost the browser
-       shows under the cursor is the full product card, not a tiny/partial
-       snapshot — matters especially if the image is still lazy-loading. */
-    const rect = card.getBoundingClientRect();
-    e.dataTransfer.setDragImage(card, e.clientX - rect.left, e.clientY - rect.top);
-    card.classList.add("dragging");
-  }
-  document.body.classList.add("shop-card-dragging");
-}
-function shopDragEnd(e) {
-  e.currentTarget.closest(".shop-card")?.classList.remove("dragging");
-  document.body.classList.remove("shop-card-dragging");
-  document.getElementById("stage").classList.remove("drag-over");
-}
-function shopStageDragOver(e) {
-  if (!document.body.classList.contains("shop-card-dragging")) return;
-  e.preventDefault();
-  e.dataTransfer.dropEffect = "copy";
-  document.getElementById("stage").classList.add("drag-over");
-}
-function shopStageDragLeave(e) {
-  if (e.target === e.currentTarget) document.getElementById("stage").classList.remove("drag-over");
-}
-async function shopStageDrop(e) {
-  e.preventDefault();
-  document.getElementById("stage").classList.remove("drag-over");
-  document.body.classList.remove("shop-card-dragging");
-  const id = e.dataTransfer.getData("text/plain");
-  if (!id || !shopProduct(id)) return;
-  shopPlaceOpen(id, e.clientX, e.clientY);
-  await shopAiGenerate();
 }
 
 /* ── Init ── */
