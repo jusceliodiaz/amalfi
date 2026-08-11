@@ -2475,4 +2475,15 @@ html, body {
 }
 @media (max-width: 600px) {
   #pano-modal-box { width: 100vw; height: 100vh; border-radius: 0; }
+  /* Full-bleed box touches the real screen edges on mobile — without this,
+     the close button/badge/label land under the notch/status bar. */
+  #pano-modal-close {
+    top: max(16px, env(safe-area-inset-top, 16px));
+    right: max(16px, env(safe-area-inset-right, 16px));
+  }
+  #pano-modal-badge {
+    top: max(16px, env(safe-area-inset-top, 16px));
+    left: max(16px, env(safe-area-inset-left, 16px));
+  }
+  #pano-room-label { top: max(16px, env(safe-area-inset-top, 16px)); }
 }
