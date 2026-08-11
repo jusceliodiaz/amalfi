@@ -237,6 +237,7 @@ function closePanoModal() {
 document.addEventListener("keydown", e => { if (e.key === "Escape") closePanoModal(); });
 document.getElementById("pano-modal-backdrop").addEventListener("click", closePanoModal);
 document.getElementById("pano-modal-close").addEventListener("click", closePanoModal);
+document.getElementById("pano-modal-close-dock").addEventListener("click", closePanoModal);
 
 window.openPanoModal = openPanoModal;
 window.closePanoModal = closePanoModal;

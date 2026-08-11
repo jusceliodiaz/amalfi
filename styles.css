@@ -2369,6 +2369,26 @@ html, body {
   transition: background 0.2s;
 }
 #pano-modal-close:hover { background: #fff; }
+/* Mobile close dock — hidden on desktop, swapped in under the 600px query below. */
+#pano-modal-close-dock {
+  display: none;
+  position: absolute;
+  left: 50%;
+  z-index: 12;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  border-radius: 999px;
+  background: rgba(20, 19, 15, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
 #pano-modal-badge {
   position: absolute; top: 16px; left: 16px; z-index: 10;
   padding: 5px 13px;
@@ -2476,14 +2496,21 @@ html, body {
 @media (max-width: 600px) {
   #pano-modal-box { width: 100vw; height: 100vh; border-radius: 0; }
   /* Full-bleed box touches the real screen edges on mobile — without this,
-     the close button/badge/label land under the notch/status bar. */
-  #pano-modal-close {
-    top: max(16px, env(safe-area-inset-top, 16px));
-    right: max(16px, env(safe-area-inset-right, 16px));
+     the badge/label land under the notch/status bar. */
+  /* The top-corner ✕ is unreliable on iPhone (small hit target right under
+     the notch/Dynamic Island) — swap it for a thumb-reachable bottom dock. */
+  #pano-modal-close { display: none; }
+  #pano-modal-close-dock {
+    display: flex;
+    bottom: max(24px, env(safe-area-inset-bottom, 24px));
+    transform: translateX(-50%);
+    padding: 13px 22px;
   }
   #pano-modal-badge {
     top: max(16px, env(safe-area-inset-top, 16px));
     left: max(16px, env(safe-area-inset-left, 16px));
   }
   #pano-room-label { top: max(16px, env(safe-area-inset-top, 16px)); }
+  /* Hint sits just above the close dock instead of the screen edge. */
+  #pano-hint { bottom: max(84px, calc(env(safe-area-inset-bottom, 0px) + 84px)); }
 }

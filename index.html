@@ -107,7 +107,7 @@
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Cormorant+Garamond:wght@400;500;600&display=swap"
     /></noscript>
-    <link rel="stylesheet" href="styles.css?v=8" />
+    <link rel="stylesheet" href="styles.css?v=10" />
   </head>
   <body>
     <div id="preloader">
@@ -706,6 +706,13 @@
         <canvas id="pano-canvas"></canvas>
         <div id="pano-hotspots"></div>
         <div id="pano-hint">Trascina per esplorare · Scorri per zoom</div>
+        <!-- Mobile-only close dock — the top-corner ✕ is too small/unreliable to
+             tap on iPhone (thumb reach + notch), so mobile gets a bottom dock
+             button instead. Both buttons call the same closePanoModal(). -->
+        <button id="pano-modal-close-dock" title="Chiudi">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          Chiudi
+        </button>
         <div id="pano-loading">
           <div id="pano-spinner"></div>
           Caricamento...
@@ -728,6 +735,6 @@
     <script src="script-fp.js"></script>
     <script src="shop.js?v=7"></script>
     <script type="module" src="shop3d.js?v=6"></script>
-    <script type="module" src="pano360.js?v=1"></script>
+    <script type="module" src="pano360.js?v=2"></script>
   </body>
 </html>
