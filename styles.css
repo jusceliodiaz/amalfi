@@ -2369,26 +2369,34 @@ html, body {
   transition: background 0.2s;
 }
 #pano-modal-close:hover { background: #fff; }
-/* Mobile close dock — hidden on desktop, swapped in under the 600px query below. */
+/* Close dock — bottom-center pill, shown on both desktop and mobile
+   alongside the top-corner ✕ (the ✕ alone is a small, easy-to-miss
+   target, especially on touch). */
 #pano-modal-close-dock {
-  display: none;
+  display: flex;
   position: absolute;
+  bottom: max(24px, env(safe-area-inset-bottom, 24px));
   left: 50%;
+  transform: translateX(-50%);
   z-index: 12;
   align-items: center;
   gap: 8px;
+  padding: 13px 22px;
   border: none;
   border-radius: 999px;
   background: rgba(20, 19, 15, 0.72);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   color: #fff;
+  cursor: pointer;
   font-family: 'DM Sans', sans-serif;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  transition: background 0.2s;
 }
+#pano-modal-close-dock:hover { background: rgba(20, 19, 15, 0.88); }
 #pano-modal-badge {
   position: absolute; top: 16px; left: 16px; z-index: 10;
   padding: 5px 13px;
@@ -2410,7 +2418,9 @@ html, body {
 #pano-canvas:active { cursor: grabbing; }
 #pano-hint {
   position: absolute;
-  bottom: 20px; left: 50%;
+  /* Sits above the close dock instead of the screen edge. */
+  bottom: max(84px, calc(env(safe-area-inset-bottom, 0px) + 84px));
+  left: 50%;
   transform: translateX(-50%);
   padding: 7px 16px;
   border-radius: 20px;
@@ -2498,19 +2508,12 @@ html, body {
   /* Full-bleed box touches the real screen edges on mobile — without this,
      the badge/label land under the notch/status bar. */
   /* The top-corner ✕ is unreliable on iPhone (small hit target right under
-     the notch/Dynamic Island) — swap it for a thumb-reachable bottom dock. */
+     the notch/Dynamic Island) — hide it there, the bottom dock (shared with
+     desktop, positioned in the base rule above) is the only close action left. */
   #pano-modal-close { display: none; }
-  #pano-modal-close-dock {
-    display: flex;
-    bottom: max(24px, env(safe-area-inset-bottom, 24px));
-    transform: translateX(-50%);
-    padding: 13px 22px;
-  }
   #pano-modal-badge {
     top: max(16px, env(safe-area-inset-top, 16px));
     left: max(16px, env(safe-area-inset-left, 16px));
   }
   #pano-room-label { top: max(16px, env(safe-area-inset-top, 16px)); }
-  /* Hint sits just above the close dock instead of the screen edge. */
-  #pano-hint { bottom: max(84px, calc(env(safe-area-inset-bottom, 0px) + 84px)); }
 }
