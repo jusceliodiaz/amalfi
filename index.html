@@ -706,9 +706,10 @@
         <canvas id="pano-canvas"></canvas>
         <div id="pano-hotspots"></div>
         <div id="pano-hint">Trascina per esplorare · Scorri per zoom</div>
-        <!-- Mobile-only close dock — the top-corner ✕ is too small/unreliable to
-             tap on iPhone (thumb reach + notch), so mobile gets a bottom dock
-             button instead. Both buttons call the same closePanoModal(). -->
+        <!-- Bottom close dock — shown on desktop and mobile alongside the
+             top-corner ✕ (on mobile the ✕ is hidden, since it's too
+             small/unreliable to tap under the notch/Dynamic Island).
+             Both buttons call the same closePanoModal(). -->
         <button id="pano-modal-close-dock" title="Chiudi">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6 6 18M6 6l12 12"/></svg>
           Chiudi
