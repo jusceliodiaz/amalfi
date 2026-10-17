@@ -10,8 +10,8 @@ const SHOP_PRODUCTS = [
   {
     id: "daybed-baldacchino",
     cat: "sofas",
-    name: "DAYBED A BALDACCHINO",
-    variant: "Daybed da esterno su misura, baldacchino e ruote, tessuto a righe marrone",
+    name: "CANOPY DAYBED",
+    variant: "Custom outdoor daybed with canopy and wheels, brown striped fabric",
     size: "200×160×220 cm",
     price: 3200,
     store: "Custom",
@@ -23,7 +23,7 @@ const SHOP_PRODUCTS = [
     id: "bondholmen",
     cat: "sofas",
     name: "BONDHOLMEN",
-    variant: "Divano da esterno a 2 posti, bianco/beige",
+    variant: "2-seat outdoor sofa, white/beige",
     size: "139×81×73 cm",
     price: 189,
     img: "https://www.ikea.com/it/it/images/products/bondholmen-divano-a-2-posti-da-esterno-bianco-beige__1333145_pe946396_s5.jpg",
@@ -35,7 +35,7 @@ const SHOP_PRODUCTS = [
     id: "lacko",
     cat: "sofas",
     name: "LÄCKÖ",
-    variant: "Divano da esterno a 2 posti, grigio",
+    variant: "2-seat outdoor sofa, grey",
     size: "115×56×87 cm",
     price: 119,
     img: "https://www.ikea.com/it/it/images/products/laeckoe-divano-a-2-posti-da-esterno-grigio__1138955_pe880166_s5.jpg",
@@ -47,7 +47,7 @@ const SHOP_PRODUCTS = [
     id: "tallskar",
     cat: "chairs",
     name: "TALLSKÄR",
-    variant: "Poltrona da giardino, antracite",
+    variant: "Garden armchair, anthracite",
     size: "83×82×106 cm",
     price: 119,
     img: "https://www.ikea.com/it/it/images/products/tallskaer-poltrona-da-giardino-antracite__1385516_pe963345_s5.jpg",
@@ -59,7 +59,7 @@ const SHOP_PRODUCTS = [
     id: "skarpo",
     cat: "chairs",
     name: "SKARPÖ",
-    variant: "Poltrona da giardino, bianca",
+    variant: "Garden armchair, white",
     size: "81×79×71 cm",
     price: 39.95,
     img: "https://www.ikea.com/it/it/images/products/skarpoe-poltrona-da-giardino-bianco__0729491_pe737010_s5.jpg",
@@ -71,7 +71,7 @@ const SHOP_PRODUCTS = [
     id: "nammaro",
     cat: "chairs",
     name: "NÄMMARÖ",
-    variant: "Sedia relax da giardino, marrone chiaro/grigio-beige chiaro",
+    variant: "Garden reclining chair, light brown/light grey-beige",
     size: "60×71×107 cm",
     price: 78.95,
     img: "https://www.ikea.com/it/it/images/products/naemmaroe-sedia-relax-da-giardino-mordente-marrone-chiaro-kuddarna-grigio-beige-chiaro__1437400_pe984434_s5.jpg",
@@ -85,8 +85,8 @@ const SHOP_PRODUCTS = [
     id: "fejka-ulivo",
     cat: "plants",
     name: "FEJKA",
-    variant: "Pianta artificiale in vaso, da interno/esterno, ulivo",
-    size: "vaso 19 cm · alt. 150 cm",
+    variant: "Artificial potted plant, indoor/outdoor, olive tree",
+    size: "pot 19 cm · h. 150 cm",
     price: 49.95,
     img: "https://www.ikea.com/it/it/images/products/fejka-pianta-artificiale-in-vaso-da-interno-esterno-ulivo-verde__1485471_pe1001980_s5.jpg",
     url: "https://www.ikea.com/it/it/p/fejka-pianta-artificiale-in-vaso-da-interno-esterno-ulivo-verde-40617699/",
@@ -97,8 +97,8 @@ const SHOP_PRODUCTS = [
     id: "fejka-lavanda",
     cat: "plants",
     name: "FEJKA",
-    variant: "Pianta artificiale in vaso, da interno/esterno, lavanda lilla",
-    size: "vaso 12 cm · alt. 48 cm",
+    variant: "Artificial potted plant, indoor/outdoor, lilac lavender",
+    size: "pot 12 cm · h. 48 cm",
     price: 9.95,
     img: "https://www.ikea.com/it/it/images/products/fejka-pianta-artificiale-in-vaso-da-interno-esterno-lavanda-lilla__1485462_pe1001977_s5.jpg",
     url: "https://www.ikea.com/it/it/p/fejka-pianta-artificiale-in-vaso-da-interno-esterno-lavanda-lilla-70617693/",
@@ -109,10 +109,10 @@ const SHOP_PRODUCTS = [
     id: "fejka-succulenta",
     cat: "plants",
     name: "FEJKA",
-    variant: "Piante artificiali in vaso, da interno/esterno, succulenta (set da 3)",
-    size: "vaso 6 cm · alt. 12 cm",
+    variant: "Artificial potted plants, indoor/outdoor, succulent (set of 3)",
+    size: "pot 6 cm · h. 12 cm",
     price: 2.95,
-    unit: "set da 3",
+    unit: "set of 3",
     img: "https://www.ikea.com/it/it/images/products/fejka-pianta-artificiale-in-vaso-da-interno-esterno-succulenta__0614187_pe686812_s5.jpg",
     url: "https://www.ikea.com/it/it/p/fejka-pianta-artificiale-in-vaso-da-interno-esterno-succulenta-50519764/",
     model: "assets/models/fejka-succulenta.glb",
@@ -124,10 +124,10 @@ const SHOP_PRODUCTS = [
     id: "runnen-acacia",
     cat: "floor",
     name: "RUNNEN",
-    variant: "Pavimentazione da esterno, acacia",
-    size: "30×30×2 cm · 0,81 m² (9 piastrelle)",
+    variant: "Outdoor decking, acacia",
+    size: "30×30×2 cm · 0.81 m² (9 tiles)",
     price: 25,
-    unit: "confezione",
+    unit: "pack",
     img: "https://www.ikea.com/it/it/images/products/runnen-pedana-pavimentazione-da-esterno-acacia__1151157_pe884806_s5.jpg",
     url: "https://www.ikea.com/it/it/p/runnen-pedana-pavimentazione-da-esterno-acacia-60518486/",
     model: "assets/models/runnen-acacia.glb",
@@ -137,10 +137,10 @@ const SHOP_PRODUCTS = [
     id: "runnen-tessuto",
     cat: "floor",
     name: "RUNNEN",
-    variant: "Pavimentazione da esterno, tessuto grigio scuro",
-    size: "30×30 cm · 0,81 m² (9 piastrelle)",
+    variant: "Outdoor decking, dark grey fabric",
+    size: "30×30 cm · 0.81 m² (9 tiles)",
     price: 35,
-    unit: "confezione",
+    unit: "pack",
     img: "https://www.ikea.com/it/it/images/products/runnen-pedana-pavimentazione-da-esterno-tessuto-grigio-scuro__1275188_pe930555_s5.jpg",
     url: "https://www.ikea.com/it/it/p/runnen-pedana-pavimentazione-da-esterno-tessuto-grigio-scuro-40557799/",
     model: "assets/models/runnen-tessuto.glb",
@@ -150,10 +150,10 @@ const SHOP_PRODUCTS = [
     id: "runnen-grigio",
     cat: "floor",
     name: "RUNNEN",
-    variant: "Pavimentazione da esterno, grigio scuro",
-    size: "30×30×2 cm · 0,81 m² (9 piastrelle)",
+    variant: "Outdoor decking, dark grey",
+    size: "30×30×2 cm · 0.81 m² (9 tiles)",
     price: 19.95,
-    unit: "confezione",
+    unit: "pack",
     img: "https://www.ikea.com/it/it/images/products/runnen-pedana-pavimentazione-da-esterno-grigio-scuro__0237434_pe376790_s5.jpg",
     url: "https://www.ikea.com/it/it/p/runnen-pedana-pavimentazione-da-esterno-grigio-scuro-90238111/",
     model: "assets/models/runnen-grigio.glb",
@@ -185,7 +185,7 @@ function shopCartItems() { return SHOP_PRODUCTS.filter(p => shopState.cart.has(p
 function shopTotal() { return shopCartItems().reduce((s, p) => s + p.price, 0); }
 function shopFmt(n) {
   const dec = n % 1 === 0 ? 0 : 2;
-  return "€ " + n.toLocaleString("it-IT", { minimumFractionDigits: dec, maximumFractionDigits: 2 });
+  return "€ " + n.toLocaleString("en-US", { minimumFractionDigits: dec, maximumFractionDigits: 2 });
 }
 function shopSaveCart() {
   localStorage.setItem("archviz-shop-cart", JSON.stringify([...shopState.cart]));
@@ -219,7 +219,7 @@ function shopRenderGrid() {
     <div class="shop-card${inCart ? " selected" : ""}" data-id="${p.id}" data-cat="${p.cat}" onclick="shopToggleItem('${p.id}')">
       <div class="shop-card-imgwrap">
         <img src="${p.img}" alt="${p.name} — ${p.variant}" loading="lazy" />
-        <button class="shop-ai-btn" title="Posiziona nella tua scena con l'IA" onclick="event.stopPropagation();shopPlaceOpen('${p.id}')">
+        <button class="shop-ai-btn" title="Place in your scene with AI" onclick="event.stopPropagation();shopPlaceOpen('${p.id}')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 4l1.7 4.3L18 10l-4.3 1.7L12 16l-1.7-4.3L6 10l4.3-1.7L12 4z"/>
             <path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15z"/>
@@ -227,14 +227,14 @@ function shopRenderGrid() {
           <span>AI</span>
         </button>
         ${p.cat === "floor" ? "" : `
-        <button class="shop-3d-btn" title="Visualizza in 3D" onclick="event.stopPropagation();shop3dOpen('${p.id}')">
+        <button class="shop-3d-btn" title="View in 3D" onclick="event.stopPropagation();shop3dOpen('${p.id}')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 2l8.5 5v10L12 22l-8.5-5V7L12 2z"/>
             <path d="M12 22V12M12 12L3.5 7M12 12l8.5-5"/>
           </svg>
           <span>3D</span>
         </button>
-        <button class="shop-ar-btn" title="Vedi nel tuo spazio (realtà aumentata)" onclick="event.stopPropagation();shopArOpen('${p.id}')">
+        <button class="shop-ar-btn" title="See it in your space (augmented reality)" onclick="event.stopPropagation();shopArOpen('${p.id}')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
             <path d="M3 7V5a2 2 0 012-2h2M17 3h2a2 2 0 012 2v2M21 17v2a2 2 0 01-2 2h-2M7 21H5a2 2 0 01-2-2v-2"/>
             <path d="M12 8l3.5 2v4L12 16l-3.5-2v-4L12 8z"/>
@@ -248,7 +248,7 @@ function shopRenderGrid() {
         <div class="shop-card-variant">${p.variant}</div>
         <div class="shop-card-size">${p.size}</div>
         <div class="shop-card-quick-actions">
-          <button class="shop-quick-ai-btn" title="Posiziona nella tua scena con l'IA" onclick="event.stopPropagation();shopPlaceOpen('${p.id}')">
+          <button class="shop-quick-ai-btn" title="Place in your scene with AI" onclick="event.stopPropagation();shopPlaceOpen('${p.id}')">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
               <path d="M12 4l1.7 4.3L18 10l-4.3 1.7L12 16l-1.7-4.3L6 10l4.3-1.7L12 4z"/>
               <path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15z"/>
@@ -256,14 +256,14 @@ function shopRenderGrid() {
             <span>AI</span>
           </button>
           ${p.cat === "floor" ? "" : `
-          <button class="shop-quick-3d-btn" title="Visualizza in 3D" onclick="event.stopPropagation();shop3dOpen('${p.id}')">
+          <button class="shop-quick-3d-btn" title="View in 3D" onclick="event.stopPropagation();shop3dOpen('${p.id}')">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
               <path d="M12 2l8.5 5v10L12 22l-8.5-5V7L12 2z"/>
               <path d="M12 22V12M12 12L3.5 7M12 12l8.5-5"/>
             </svg>
             <span>3D</span>
           </button>
-          <button class="shop-quick-ar-btn" title="Vedi nel tuo spazio (realtà aumentata)" onclick="event.stopPropagation();shopArOpen('${p.id}')">
+          <button class="shop-quick-ar-btn" title="See it in your space (augmented reality)" onclick="event.stopPropagation();shopArOpen('${p.id}')">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
               <path d="M3 7V5a2 2 0 012-2h2M17 3h2a2 2 0 012 2v2M21 17v2a2 2 0 01-2 2h-2M7 21H5a2 2 0 01-2-2v-2"/>
               <path d="M12 8l3.5 2v4L12 16l-3.5-2v-4L12 8z"/>
@@ -275,12 +275,12 @@ function shopRenderGrid() {
           <div class="shop-card-price">${shopFmt(p.price)}${p.unit ? `<span class="shop-price-unit"> /${p.unit}</span>` : ""}</div>
           <div class="shop-card-actions">
             ${p.store === "Custom"
-              ? `<span class="shop-buy-link shop-buy-link--static" title="Pezzo su misura, non disponibile per l'acquisto diretto">Su misura</span>`
-              : `<a class="shop-buy-link" href="${p.url}" target="_blank" rel="noopener" title="Acquista su ${p.store || 'IKEA Italia'}" onclick="event.stopPropagation()">
+              ? `<span class="shop-buy-link shop-buy-link--static" title="Custom-made piece, not available for direct purchase">Custom</span>`
+              : `<a class="shop-buy-link" href="${p.url}" target="_blank" rel="noopener" title="Buy at ${p.store || 'IKEA Italia'}" onclick="event.stopPropagation()">
               ${p.store === "Leroy Merlin" ? "LEROY" : "IKEA"} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
             </a>`}
             <button class="shop-add-btn${inCart ? " added" : ""}" onclick="event.stopPropagation();shopToggleItem('${p.id}')">
-              ${inCart ? "Aggiunto ✓" : "Aggiungi"}
+              ${inCart ? "Added ✓" : "Add"}
             </button>
           </div>
         </div>
@@ -306,7 +306,7 @@ function shopUpdateTotals() {
   const count = shopState.cart.size;
   const pill = document.getElementById("shop-total-pill");
   pill.classList.toggle("show", count > 0);
-  pill.innerHTML = `<span class="shop-pill-lbl">Totale</span><span class="shop-pill-val">${shopFmt(total)}</span>`;
+  pill.innerHTML = `<span class="shop-pill-lbl">Total</span><span class="shop-pill-val">${shopFmt(total)}</span>`;
   pill.onclick = shopOpenOrder;
   const badge = document.getElementById("shop-btn-badge");
   badge.textContent = count;
@@ -353,8 +353,8 @@ function shopArOpen(id) {
   requestAnimationFrame(() => {
     const hint = document.getElementById("shop-ar-hint");
     hint.textContent = viewer.canActivateAR
-      ? 'Tocca "Vedi in AR" e inquadra il pavimento con la fotocamera.'
-      : "AR disponibile da smartphone (Android / iPhone) — su questo dispositivo puoi ruotare il modello in 3D.";
+      ? 'Tap "View in AR" and point your camera at the floor.'
+      : "AR available on smartphones (Android / iPhone) — on this device you can rotate the model in 3D.";
   });
 }
 function shopArClose() {
@@ -383,7 +383,7 @@ function shopCloseOrder() {
 
 function shopRenderOrder() {
   const listEl = document.getElementById("shop-order-list");
-  const cats = [["sofas", "Divani"], ["chairs", "Sedie"], ["plants", "Piante"], ["floor", "Pavimenti"]];
+  const cats = [["sofas", "Sofas"], ["chairs", "Chairs"], ["plants", "Plants"], ["floor", "Flooring"]];
   let html = "";
   cats.forEach(([cat, label]) => {
     const items = shopCartItems().filter(p => p.cat === cat);
@@ -399,18 +399,18 @@ function shopRenderOrder() {
           <div class="shop-order-line-variant">${p.variant} · ${p.size}</div>
         </div>
         <div class="shop-order-line-price">${shopFmt(p.price)}${p.unit ? `<span class="shop-price-unit"> /${p.unit}</span>` : ""}</div>
-        <button class="shop-order-remove" title="Rimuovi" onclick="shopToggleItem('${p.id}')">
+        <button class="shop-order-remove" title="Remove" onclick="shopToggleItem('${p.id}')">
           <svg viewBox="0 0 10 10"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg>
         </button>
       </div>`;
     });
   });
-  if (!html) html = `<div class="shop-order-empty">Ancora nessun mobile selezionato — aggiungi articoli dal negozio.</div>`;
+  if (!html) html = `<div class="shop-order-empty">No furniture selected yet — add items from the shop.</div>`;
   listEl.innerHTML = html;
   document.getElementById("shop-order-total").textContent = shopFmt(shopTotal());
 
   const confirmBtn = document.getElementById("shop-confirm-btn");
-  confirmBtn.textContent = shopState.confirmed ? "✓ Ordine confermato" : "Conferma ordine";
+  confirmBtn.textContent = shopState.confirmed ? "✓ Order confirmed" : "Confirm order";
   confirmBtn.classList.toggle("confirmed", shopState.confirmed);
   confirmBtn.disabled = shopState.cart.size === 0;
 }
@@ -427,10 +427,10 @@ function shopAiStatus(msg) { document.getElementById("shop-ai-status").textConte
 /* Per-category copy for the "Visualize in your scene" modal — furniture
    and plants get "place" language, floor gets "apply material" language. */
 const SHOP_AI_ACTION_LABELS = {
-  plants: { button: "Posiziona la pianta nella scena", status: "Posizionamento della pianta nella scena..." },
-  floor: { button: "Sostituisci il pavimento nella scena", status: "Sostituzione del pavimento nella scena..." }
+  plants: { button: "Place the plant in the scene", status: "Placing the plant in the scene..." },
+  floor: { button: "Replace the floor in the scene", status: "Replacing the floor in the scene..." }
 };
-const SHOP_AI_ACTION_DEFAULT = { button: "Posiziona il mobile nella scena", status: "Posizionamento del mobile nella scena..." };
+const SHOP_AI_ACTION_DEFAULT = { button: "Place the furniture in the scene", status: "Placing the furniture in the scene..." };
 function shopAiActionLabels(cat) {
   return SHOP_AI_ACTION_LABELS[cat] || SHOP_AI_ACTION_DEFAULT;
 }
@@ -452,10 +452,10 @@ function shopPlaceOpen(id, originX, originY) {
     shopAiVideoStatus("");
     const prompt = document.getElementById("shop-ai-prompt");
     const ph = {
-      sofas: `es. sostituisci il divano esistente con questo ${p.name}, lascia tutto il resto uguale...`,
-      chairs: `es. aggiungi questo ${p.name} alla terrazza, vicino ai posti a sedere esistenti...`,
-      plants: `es. posiziona questo ${p.name} nell'angolo della terrazza...`,
-      floor: `es. sostituisci la pavimentazione della terrazza con questo ${p.name}...`
+      sofas: `e.g. replace the existing sofa with this ${p.name}, keep everything else the same...`,
+      chairs: `e.g. add this ${p.name} to the terrace, next to the existing seating...`,
+      plants: `e.g. place this ${p.name} in the corner of the terrace...`,
+      floor: `e.g. replace the terrace flooring with this ${p.name}...`
     };
     prompt.placeholder = ph[p.cat] || ph.sofas;
   }
@@ -475,18 +475,18 @@ async function shopOrderCapture() {
   const btn = document.getElementById("shop-ai-capture-btn");
   const thumb = document.getElementById("shop-ai-capture-thumb");
   btn.disabled = true;
-  btn.textContent = "⏳ Cattura in corso...";
+  btn.textContent = "⏳ Capturing...";
   /* captureSceneFrame reads the video/canvas directly — UI overlays are never captured */
   const b64 = await captureSceneFrame();
   btn.disabled = false;
   if (!b64) {
-    btn.textContent = "📷 Cattura scena";
-    thumb.innerHTML = '<span style="color:rgba(255,80,80,0.7)">Non riuscito — riprova</span>';
+    btn.textContent = "📷 Capture scene";
+    thumb.innerHTML = '<span style="color:rgba(255,80,80,0.7)">Failed — try again</span>';
     return;
   }
   shopState.captureB64 = b64;
-  btn.textContent = "✓ Ricattura";
-  thumb.innerHTML = `<img src="data:image/jpeg;base64,${b64}" alt="cattura scena" />`;
+  btn.textContent = "✓ Recapture";
+  thumb.innerHTML = `<img src="data:image/jpeg;base64,${b64}" alt="scene capture" />`;
 }
 
 const shopImgB64Cache = new Map();
@@ -513,16 +513,16 @@ async function shopProductImageB64(p) {
 
 async function shopAiGenerate() {
   const key = aiKey();
-  if (!key) return shopAiStatus("Nessuna API Key — apri il pannello IA e incolla prima la tua chiave.");
+  if (!key) return shopAiStatus("No API Key — open the AI panel and paste your key first.");
   const p = shopProduct(shopState.placeId);
-  if (!p) return shopAiStatus("Apri prima la simulazione IA da una scheda prodotto.");
+  if (!p) return shopAiStatus("Open the AI simulation from a product card first.");
 
   let scene = shopState.captureB64;
   if (!scene || scene.length < 500) {
     await shopOrderCapture();
     scene = shopState.captureB64;
   }
-  if (!scene || scene.length < 500) return shopAiStatus("Impossibile catturare la scena.");
+  if (!scene || scene.length < 500) return shopAiStatus("Unable to capture the scene.");
 
   const btn = document.getElementById("shop-ai-generate-btn");
   btn.disabled = true;
@@ -574,17 +574,17 @@ async function shopAiGenerate() {
         errs.push(`[${model}] response had no image`);
       } catch (err) { errs.push(`[${model}] ${err.message}`); }
     }
-    if (!imgB64) throw new Error(errs.join("\n") || "Nessuna immagine restituita.");
+    if (!imgB64) throw new Error(errs.join("\n") || "No image returned.");
 
     shopState.resultB64 = imgB64;
     document.getElementById("shop-ai-result-img").src = "data:image/png;base64," + imgB64;
     document.getElementById("shop-ai-result").classList.add("visible");
     document.getElementById("shop-ai-dl-btn").classList.add("visible");
     galleryAdd(imgB64, "image/png", p.name);
-    shopAiStatus("Fatto! " + p.name + " posizionato nella tua scena.");
+    shopAiStatus("Done! " + p.name + " placed in your scene.");
   } catch (e) {
     console.error(e);
-    shopAiStatus("Errore: " + e.message);
+    shopAiStatus("Error: " + e.message);
   }
   btn.disabled = false;
 }
@@ -624,15 +624,15 @@ function shopAiCloseVideo() {
 
 async function shopAiGenerateVideo() {
   const key = aiKey();
-  if (!key) return shopAiVideoStatus("Nessuna API Key — apri il pannello IA e incolla prima la tua chiave.");
+  if (!key) return shopAiVideoStatus("No API Key — open the AI panel and paste your key first.");
   const p = shopProduct(shopState.placeId);
-  if (!p) return shopAiVideoStatus("Apri prima la simulazione IA da una scheda prodotto.");
+  if (!p) return shopAiVideoStatus("Open the AI simulation from a product card first.");
 
   /* Best source: the generated image with the furniture placed.
      Fallback: the raw scene capture. */
   /* The video ALWAYS animates the generated image with the product applied */
   const frameB64 = shopState.resultB64, frameMime = "image/png";
-  if (!frameB64) return shopAiVideoStatus(`Genera prima l'immagine con "${shopAiActionLabels(p.cat).button}" — il video anima esattamente quell'immagine.`);
+  if (!frameB64) return shopAiVideoStatus(`Generate the image first with "${shopAiActionLabels(p.cat).button}" — the video animates exactly that image.`);
 
   const userPrompt = document.getElementById("shop-ai-prompt").value.trim();
   const prompt =
@@ -645,7 +645,7 @@ async function shopAiGenerateVideo() {
   const btn = document.getElementById("shop-ai-video-btn");
   btn.disabled = true;
   shopAiCloseVideo();
-  shopAiVideoStatus("Avvio generazione video...");
+  shopAiVideoStatus("Starting video generation...");
 
   try {
     const instance = { prompt, image: { bytesBase64Encoded: frameB64, mimeType: frameMime } };
@@ -658,21 +658,21 @@ async function shopAiGenerateVideo() {
         try { op = await aiStartVeoOperation(key, ver, model, instance, "16:9"); break outer; }
         catch (err) { errs.push(`[${ver}/${model}] ${err.message}`); }
       }
-    if (!op) throw new Error("Nessun modello Veo disponibile per questa chiave.\n" + errs.join("\n"));
+    if (!op) throw new Error("No Veo model available for this key.\n" + errs.join("\n"));
 
-    shopAiVideoStatus("Creazione video (può richiedere da 1 a 3 minuti)...");
+    shopAiVideoStatus("Creating video (may take 1 to 3 minutes)...");
     const result = await aiPollVeoOperation(key, op.ver, op.name);
     const d = extractVideoResult(result);
     if (!d) {
       const reason = result?.response?.raiMediaFilteredReasons?.[0] ||
         result?.response?.generateVideoResponse?.raiMediaFilteredReasons?.[0];
-      throw new Error(reason ? "Bloccato dal filtro di sicurezza: " + reason : "La risposta non contiene un video.");
+      throw new Error(reason ? "Blocked by the safety filter: " + reason : "The response does not contain a video.");
     }
 
     let blob;
     if (d.uri) {
       const resp = await fetch(d.uri, { headers: { "x-goog-api-key": key } });
-      if (!resp.ok) throw new Error("Impossibile scaricare il video generato.");
+      if (!resp.ok) throw new Error("Unable to download the generated video.");
       blob = await resp.blob();
     } else {
       const bin = atob(d.b64);
@@ -685,11 +685,11 @@ async function shopAiGenerateVideo() {
     document.getElementById("shop-ai-video").src = shopState.videoUrl;
     document.getElementById("shop-ai-video-result").classList.add("visible");
     document.getElementById("shop-ai-video-dl-btn").classList.add("visible");
-    shopAiVideoStatus("Fatto! Video con " + p.name + " pronto.");
+    shopAiVideoStatus("Done! Video with " + p.name + " ready.");
     galleryAddVideoBlob(blob, p.name + " video");
   } catch (e) {
     console.error(e);
-    shopAiVideoStatus("Errore: " + e.message);
+    shopAiVideoStatus("Error: " + e.message);
   }
   btn.disabled = false;
 }

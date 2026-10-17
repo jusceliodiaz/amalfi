@@ -5,7 +5,7 @@
 Experiência interativa de visualização arquitetônica, inspirada na Parallel (parallel.life).
 A experiência **inteira acontece numa única tela**, em modo cinematográfico:
 
-1. A tela inicia com uma **tela de loading** (fundo bege, logo, contador de progresso real) que pré-carrega o poster, os vídeos das cenas e a sequência de transição principal — só depois disso o botão **"Entra"** libera a experiência.
+1. A tela inicia com uma **tela de loading** (fundo bege, título "Start the experience", contador de progresso real) que pré-carrega o poster, os vídeos das cenas e a sequência de transição principal — só depois disso o botão **"Enter"** libera a experiência.
 2. Após o "Entra", a tela mostra um **vídeo em loop** da cena atual.
 3. Sobre o vídeo, há **POIs (Points of Interest)** e o **dock de navegação inferior** (`#track`) com um botão por cena.
 4. Ao navegar pra outra cena, o vídeo é substituído por uma **sequência de imagens** (pré-renderizadas em IA) que simula um movimento de câmera 3D indo do ponto atual até o destino.
@@ -16,7 +16,7 @@ A experiência **inteira acontece numa única tela**, em modo cinematográfico:
 
 ## Idioma
 
-**A interface do site é em italiano** (`<html lang="it">`) — nomes de cena, textos da loja, painel de IA, galeria, tela de loading, meta tags de SEO. O código-fonte (nomes de função/variável, comentários, este arquivo) continua em inglês/português como convenção de desenvolvimento — só o que o usuário final vê na tela está em italiano. Nomes de marca e de produto (BONDHOLMEN, FEJKA, RUNNEN, Veo, Gemini) não são traduzidos.
+**A interface do site é em inglês** (`<html lang="en">`) — nomes de cena, textos da loja, painel de IA, galeria, tela de loading, meta tags de SEO. O código-fonte (nomes de função/variável, comentários, este arquivo) continua em inglês/português como convenção de desenvolvimento — só o que o usuário final vê na tela está em inglês. Não há logo na tela de loading nem no canto da experiência. Nomes de marca e de produto (BONDHOLMEN, FEJKA, RUNNEN, Veo, Gemini) não são traduzidos.
 
 ## Stack
 
@@ -147,5 +147,5 @@ Repo de imagens (`images/`) está em ~83MB depois da otimização (era 250MB+). 
 - JS puro, sem TypeScript.
 - Nomes de função/variável em inglês; comentários no código em inglês.
 - `script-fp.js` é uma mistura: bloco principal minificado (herdado) + funções novas (preloader, galeria, slider A/B) escritas de forma legível ao final do arquivo — ao editar, prefira adicionar funções legíveis novas em vez de minificar manualmente.
-- Texto **voltado ao usuário final é em italiano** (ver seção "Idioma" acima) — não confundir com convenção de código.
+- Texto **voltado ao usuário final é em inglês** (ver seção "Idioma" acima) — não confundir com convenção de código.
 - Evitar libs. Se for inevitável, justificar (ex: Three.js no viewer 3D da loja).

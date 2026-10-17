@@ -2,7 +2,7 @@
    PANO 360 — equirectangular panorama viewer (Three.js).
    Ported from the 7mmstudio launching-page prototype: drag to look
    around, wheel/pinch to zoom, hotspots to jump between panoramas.
-   One panorama per scene (aerial → Piscina, pool → Terrazza), each
+   One panorama per scene (aerial → Pool, pool → Terrace), each
    with a single hotspot leading to the other.
    Exposes window.openPanoModal(sceneId) / window.closePanoModal().
    ══════════════════════════════════════════════════════ */
@@ -11,14 +11,14 @@ import * as THREE from "three";
 
 const TOUR = {
   aerial: {
-    label: "Piscina",
+    label: "Pool",
     src: "images/3dpano1.jpeg",
-    hotspots: [{ lon: 180, lat: 0, label: "Terrazza", leadsTo: "pool" }]
+    hotspots: [{ lon: 180, lat: 0, label: "Terrace", leadsTo: "pool" }]
   },
   pool: {
-    label: "Terrazza",
+    label: "Terrace",
     src: "images/3dpano2.jpeg",
-    hotspots: [{ lon: 180, lat: 0, label: "Piscina", leadsTo: "aerial" }]
+    hotspots: [{ lon: 180, lat: 0, label: "Pool", leadsTo: "aerial" }]
   }
 };
 
@@ -87,7 +87,7 @@ function navigateToPano(roomKey) {
   canvas.style.transition = hotspotsEl.style.transition = "opacity 0.3s ease";
   canvas.style.opacity = hotspotsEl.style.opacity = "0";
   setTimeout(() => {
-    loading.innerHTML = '<div id="pano-spinner"></div>Caricamento...';
+    loading.innerHTML = '<div id="pano-spinner"></div>Loading...';
     loading.classList.remove("hidden");
     new THREE.TextureLoader().load(
       TOUR[roomKey].src,
@@ -106,7 +106,7 @@ function navigateToPano(roomKey) {
         transitioning = false;
       },
       undefined,
-      () => { loading.innerHTML = "<span>Immagine non trovata</span>"; transitioning = false; }
+      () => { loading.innerHTML = "<span>Image not found</span>"; transitioning = false; }
     );
   }, 320);
 }
@@ -139,7 +139,7 @@ function initViewer(roomKey) {
         setRoomUI(roomKey);
       },
       undefined,
-      () => { loading.innerHTML = "<span>Immagine non trovata</span>"; }
+      () => { loading.innerHTML = "<span>Image not found</span>"; }
     );
 
     function onDown(x, y) { dragging = true; px = x; py = y; velLon = velLat = 0; }
@@ -206,7 +206,7 @@ function initViewer(roomKey) {
 function openPanoModal(sceneId) {
   if (!TOUR[sceneId]) return;
   loading.classList.remove("hidden");
-  loading.innerHTML = '<div id="pano-spinner"></div>Caricamento...';
+  loading.innerHTML = '<div id="pano-spinner"></div>Loading...';
   hint.classList.remove("hidden");
   modal.setAttribute("aria-hidden", "false");
   modal.classList.add("open");

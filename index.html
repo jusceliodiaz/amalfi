@@ -1,32 +1,32 @@
 <!doctype html>
-<html lang="it">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
-    <title>Esperienza Interattiva | Factory Studio</title>
+    <title>Interactive Experience | Factory Studio</title>
     <meta
       name="description"
-      content="Factory Studio — esplora in 3D un'esclusiva proprietà sulla costa italiana, con navigazione immersiva tra piscina e terrazza. Archviz interattiva di alto livello, direttamente nel tuo browser."
+      content="Factory Studio — explore an exclusive property on the Italian coast in 3D, with immersive navigation between the pool and the terrace. High-end interactive archviz, right in your browser."
     />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Factory Studio" />
     <meta
       name="keywords"
-      content="Factory Studio, Italia, costa italiana, proprietà Costiera Amalfitana, tour 3D interattivo, archviz interattiva, visualizzazione immobiliare 3D Italia, esperienza architettonica immersiva, tour esterno interattivo, tour virtuale immobiliare Italia"
+      content="Factory Studio, Italy, Italian coast, Amalfi Coast property, interactive 3D tour, interactive archviz, 3D real estate visualization Italy, immersive architectural experience, interactive exterior tour, virtual real estate tour Italy"
     />
     <meta name="geo.region" content="IT" />
-    <meta name="geo.placename" content="Italia" />
+    <meta name="geo.placename" content="Italy" />
     <meta property="og:type" content="website" />
     <meta
       property="og:title"
-      content="Tour 3D Esterno Interattivo | Proprietà sulla Costa Italiana"
+      content="Interactive 3D Exterior Tour | Property on the Italian Coast"
     />
     <meta
       property="og:description"
-      content="Factory Studio — cammina attraverso questa proprietà sulla costa italiana prima di visitare lo showroom. Tour archviz immersivo con vista sulla piscina e sulla terrazza."
+      content="Factory Studio — walk through this property on the Italian coast before visiting the showroom. Immersive archviz tour with views of the pool and the terrace."
     />
     <meta
       property="og:image"
@@ -36,14 +36,14 @@
     <meta property="og:image:height" content="630" />
     <meta
       property="og:image:alt"
-      content="Piscina a sfioro con vista sulla costa italiana — tour 3D interattivo"
+      content="Infinity pool overlooking the Italian coast — interactive 3D tour"
     />
     <meta
       property="og:url"
       content="https://www.factorystudio.works/firstperson.html"
     />
     <meta property="og:site_name" content="Factory Studio" />
-    <meta property="og:locale" content="it_IT" />
+    <meta property="og:locale" content="en_US" />
     <link
       rel="canonical"
       href="https://www.factorystudio.works/firstperson.html"
@@ -53,11 +53,11 @@
     <meta name="twitter:site" content="@weare.factory" />
     <meta
       name="twitter:title"
-      content="Tour 3D Esterno Interattivo | Proprietà sulla Costa Italiana"
+      content="Interactive 3D Exterior Tour | Property on the Italian Coast"
     />
     <meta
       name="twitter:description"
-      content="Factory Studio — cammina attraverso questa proprietà sulla costa italiana prima di visitare lo showroom. Tour archviz immersivo con vista sulla piscina e sulla terrazza."
+      content="Factory Studio — walk through this property on the Italian coast before visiting the showroom. Immersive archviz tour with views of the pool and the terrace."
     />
     <meta
       name="twitter:image"
@@ -107,16 +107,16 @@
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Cormorant+Garamond:wght@400;500;600&display=swap"
     /></noscript>
-    <link rel="stylesheet" href="styles.css?v=13" />
+    <link rel="stylesheet" href="styles.css?v=14" />
   </head>
   <body>
     <div id="preloader">
-      <img id="preloader-logo" src="images/logo.svg" alt="Logo" />
+      <h1 id="preloader-title">Start the experience</h1>
       <div id="preloader-status">
-        <span>Caricamento…</span>
+        <span>Loading…</span>
         <strong id="preloader-pct">0%</strong>
       </div>
-      <button id="preloader-start" type="button">Entra</button>
+      <button id="preloader-start" type="button">Enter</button>
     </div>
 
     <div id="cursor"></div>
@@ -130,13 +130,11 @@
       <div id="poi-layer"></div>
     </div>
 
-    <img id="site-logo" src="images/logo.svg" alt="Logo" />
-
     <div id="scene-tag"></div>
     <div id="track"></div>
 
     <!-- Shop button — opens the IKEA Italia shop panel -->
-    <div id="shop-btn" tabindex="-1" title="Negozio" onclick="shopToggle()">
+    <div id="shop-btn" tabindex="-1" title="Shop" onclick="shopToggle()">
       <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
         <path d="M3 9l1.5-5h15L21 9" />
         <path d="M3 9h18v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9z" />
@@ -146,12 +144,12 @@
     </div>
 
     <!-- Always-visible order total — appears once furniture is selected -->
-    <div id="shop-total-pill" tabindex="-1" title="Riepilogo ordine"></div>
+    <div id="shop-total-pill" tabindex="-1" title="Order summary"></div>
 
     <!-- SHOP PANEL — right drawer -->
     <div id="shop-panel">
       <div id="shop-panel-header">
-        <div id="shop-panel-title">Negozio <span>Parallelism</span></div>
+        <div id="shop-panel-title">Shop <span>Parallelism</span></div>
         <div id="shop-panel-close" onclick="shopToggle()" tabindex="-1">
           <svg viewBox="0 0 10 10">
             <line x1="2" y1="2" x2="8" y2="8" />
@@ -161,32 +159,32 @@
       </div>
       <div id="shop-tabbar">
         <button class="shop-tab-btn active" data-tab="sofas" onclick="shopSwitchTab('sofas')">
-          Divani
+          Sofas
         </button>
         <button class="shop-tab-btn" data-tab="chairs" onclick="shopSwitchTab('chairs')">
-          Sedie
+          Chairs
         </button>
         <button class="shop-tab-btn" data-tab="plants" onclick="shopSwitchTab('plants')">
-          Piante
+          Plants
         </button>
         <button class="shop-tab-btn" data-tab="floor" onclick="shopSwitchTab('floor')">
-          Pavimenti
+          Flooring
         </button>
       </div>
       <div id="shop-grid"></div>
       <div id="shop-panel-footer">
         <div class="shop-foot-total">
-          <span>Selezionato</span>
+          <span>Selected</span>
           <strong id="shop-panel-total">€ 0</strong>
         </div>
-        <button id="shop-order-btn" onclick="shopOpenOrder()" disabled>Vedi Ordine</button>
+        <button id="shop-order-btn" onclick="shopOpenOrder()" disabled>View Order</button>
       </div>
     </div>
 
     <!-- SHOP 3D VIEWER MODAL -->
     <div id="shop3d-modal">
       <div id="shop3d-card">
-        <button id="shop3d-close" title="Chiudi">
+        <button id="shop3d-close" title="Close">
           <svg viewBox="0 0 14 14">
             <line x1="2" y1="2" x2="12" y2="12" />
             <line x1="12" y1="2" x2="2" y2="12" />
@@ -207,8 +205,8 @@
       <div id="shop-order-card">
         <div id="shop-order-header">
           <div>
-            <div id="shop-order-title">Riepilogo Ordine</div>
-            <div id="shop-order-sub">Rivedi la tua selezione prima di confermare.</div>
+            <div id="shop-order-title">Order Summary</div>
+            <div id="shop-order-sub">Review your selection before confirming.</div>
           </div>
           <div id="shop-order-close" onclick="shopCloseOrder()" tabindex="-1">
             <svg viewBox="0 0 10 10">
@@ -222,14 +220,14 @@
           <div id="shop-order-list"></div>
 
           <div id="shop-order-total-row">
-            <span>Totale stimato</span>
+            <span>Estimated total</span>
             <strong id="shop-order-total">€ 0</strong>
           </div>
         </div>
 
         <div id="shop-order-actions">
-          <button id="shop-keep-btn" onclick="shopCloseOrder()">Continua a modificare</button>
-          <button id="shop-confirm-btn" onclick="shopConfirmOrder()">Conferma ordine</button>
+          <button id="shop-keep-btn" onclick="shopCloseOrder()">Keep editing</button>
+          <button id="shop-confirm-btn" onclick="shopConfirmOrder()">Confirm order</button>
         </div>
       </div>
     </div>
@@ -282,13 +280,13 @@
           <circle cx="15" cy="14" r="1" fill="currentColor" stroke="none" />
           <path d="M9 18h6" />
         </svg>
-        <span>IA</span>
+        <span>AI</span>
       </div>
       <div
         id="ai-voice-btn"
         onclick="neoLiveToggle()"
         tabindex="-1"
-        title="Parla con l'IA"
+        title="Talk to the AI"
       >
         <span id="ai-voice-pulse-ring"></span>
         <svg
@@ -306,7 +304,7 @@
           <line x1="12" y1="18" x2="12" y2="22" />
         </svg>
       </div>
-      <div id="gallery-btn" onclick="galleryToggle()" tabindex="-1" title="Galleria">
+      <div id="gallery-btn" onclick="galleryToggle()" tabindex="-1" title="Gallery">
         <svg
           viewBox="0 0 24 24"
           width="16"
@@ -330,8 +328,8 @@
       <div id="gallery-card">
         <div id="gallery-header">
           <div>
-            <div id="gallery-title">Galleria</div>
-            <div id="gallery-sub">Ogni immagine e video che generi finisce qui.</div>
+            <div id="gallery-title">Gallery</div>
+            <div id="gallery-sub">Every image and video you generate ends up here.</div>
           </div>
           <div id="gallery-close" onclick="galleryToggle()" tabindex="-1">
             <svg viewBox="0 0 10 10">
@@ -347,7 +345,7 @@
     <!-- AI PANEL -->
     <div id="ai-panel">
       <div id="ai-panel-header">
-        <div id="ai-panel-title">Studio IA</div>
+        <div id="ai-panel-title">AI Studio</div>
         <div id="ai-panel-close" onclick="aiTogglePanel()" tabindex="-1">
           <svg viewBox="0 0 10 10">
             <line x1="2" y1="2" x2="8" y2="8" />
@@ -361,7 +359,7 @@
           data-tab="image"
           onclick="aiSwitchTab('image')"
         >
-          🖼️ Immagine
+          🖼️ Image
         </button>
         <button
           class="ai-tab-btn"
@@ -377,7 +375,7 @@
           <input
             type="password"
             id="ai-key"
-            placeholder="Inserisci la API Key"
+            placeholder="Enter your API Key"
             autocomplete="off"
             spellcheck="false"
           />
@@ -391,7 +389,7 @@
                 class="ai-lbl"
                 style="display: flex; align-items: center; gap: 6px"
               >
-                <span>Istruzione di stile</span>
+                <span>Style instruction</span>
                 <span
                   style="
                     font-size: 9px;
@@ -400,30 +398,30 @@
                     font-weight: 500;
                     text-transform: none;
                   "
-                  >• usa la vista attuale come riferimento</span
+                  >• uses the current view as reference</span
                 >
               </label>
               <textarea
                 id="ai-img-prompt"
-                placeholder="Facoltativo se hai catturato la vista — es. luce dell'ora dorata, immobile di lusso..."
+                placeholder="Optional if you captured the view — e.g. golden hour light, luxury property..."
               ></textarea>
             </div>
             <div class="ai-field">
-              <label class="ai-lbl">Formato</label>
+              <label class="ai-lbl">Format</label>
               <select id="ai-img-ratio">
-                <option value="16:9" selected>16:9 — Panoramico</option>
-                <option value="9:16">9:16 — Verticale</option>
-                <option value="1:1">1:1 — Quadrato</option>
+                <option value="16:9" selected>16:9 — Widescreen</option>
+                <option value="9:16">9:16 — Vertical</option>
+                <option value="1:1">1:1 — Square</option>
                 <option value="4:3">4:3 — Standard</option>
-                <option value="3:4">3:4 — Ritratto</option>
+                <option value="3:4">3:4 — Portrait</option>
               </select>
             </div>
             <div class="ai-capture-row">
               <button class="ai-capture-btn" onclick="aiManualCapture()">
-                📷 Cattura vista
+                📷 Capture view
               </button>
               <div class="ai-capture-thumb" id="ai-img-capture-thumb">
-                Nessuna cattura
+                No capture
               </div>
             </div>
             <button
@@ -431,7 +429,7 @@
               id="ai-img-generate-btn"
               onclick="aiGenerate()"
             >
-              Genera immagine
+              Generate image
             </button>
             <div class="ai-status" id="ai-img-status"></div>
           </div>
@@ -441,13 +439,13 @@
                 id="ai-result-img"
                 alt=""
                 onclick="aiOpenLightbox()"
-                title="Clicca per ingrandire"
+                title="Click to enlarge"
               />
               <div id="ai-img-zoom-hint">🔍</div>
               <button
                 class="ai-result-close"
                 onclick="aiCloseImage()"
-                title="Chiudi"
+                title="Close"
               >
                 <svg viewBox="0 0 10 10">
                   <line x1="1" y1="1" x2="9" y2="9" />
@@ -470,7 +468,7 @@
               </svg>
             </div>
             <button class="ai-dl-btn" id="ai-img-dl-btn" onclick="aiDownload()">
-              Scarica immagine
+              Download image
             </button>
           </div>
         </div>
@@ -483,7 +481,7 @@
                 class="ai-lbl"
                 style="display: flex; align-items: center; gap: 6px"
               >
-                <span>Descrivi la scena del video</span>
+                <span>Describe the video scene</span>
                 <span
                   style="
                     font-size: 9px;
@@ -497,45 +495,45 @@
               </label>
               <textarea
                 id="ai-vid-prompt"
-                placeholder="Ripresa cinematografica con drone che avanza lentamente sopra la piscina all'ora dorata..."
+                placeholder="Cinematic drone shot slowly moving forward over the pool at golden hour..."
               ></textarea>
             </div>
             <div class="ai-field">
-              <label class="ai-lbl">Formato</label>
+              <label class="ai-lbl">Format</label>
               <select id="ai-vid-ratio">
-                <option value="16:9" selected>16:9 — Panoramico</option>
-                <option value="9:16">9:16 — Verticale</option>
+                <option value="16:9" selected>16:9 — Widescreen</option>
+                <option value="9:16">9:16 — Vertical</option>
               </select>
             </div>
-            <div class="ai-lbl">Anima da</div>
+            <div class="ai-lbl">Animate from</div>
             <div class="ai-row">
               <button
                 class="ai-capture-btn"
                 data-src="capture"
                 onclick="aiSetVideoSource('capture')"
               >
-                📷 Vista attuale
+                📷 Current view
               </button>
               <button
                 class="ai-capture-btn"
                 data-src="generated"
                 onclick="aiSetVideoSource('generated')"
               >
-                🖼️ Immagine generata
+                🖼️ Generated image
               </button>
             </div>
             <div class="ai-capture-thumb" id="ai-vid-capture-thumb">
-              Nessuna immagine — video solo testo
+              No image — text-only video
             </div>
             <button
               class="ai-generate-btn"
               id="ai-vid-generate-btn"
               onclick="aiGenerateVideo()"
             >
-              Genera video
+              Generate video
             </button>
             <div class="ai-status" id="ai-vid-status">
-              La generazione del video richiede da 1 a 3 minuti.
+              Video generation takes 1 to 3 minutes.
             </div>
           </div>
           <div class="ai-tab-col">
@@ -544,7 +542,7 @@
               <button
                 class="ai-result-close"
                 onclick="aiCloseVideo()"
-                title="Chiudi"
+                title="Close"
               >
                 <svg viewBox="0 0 10 10">
                   <line x1="1" y1="1" x2="9" y2="9" />
@@ -570,7 +568,7 @@
               id="ai-vid-dl-btn"
               onclick="aiDownloadVideo()"
             >
-              Scarica video
+              Download video
             </button>
           </div>
         </div>
@@ -579,7 +577,7 @@
 
     <!-- Lightbox — enlarge generated image -->
     <div id="ai-lightbox" onclick="aiCloseLightbox()">
-      <button id="ai-lightbox-close" onclick="aiCloseLightbox()" title="Chiudi">
+      <button id="ai-lightbox-close" onclick="aiCloseLightbox()" title="Close">
         <svg viewBox="0 0 14 14">
           <line x1="2" y1="2" x2="12" y2="12" />
           <line x1="12" y1="2" x2="2" y2="12" />
@@ -594,8 +592,8 @@
       <div id="shop-place-card">
         <div id="shop-place-header">
           <div>
-            <div id="shop-place-title">Visualizza nella tua scena</div>
-            <div id="shop-place-sub">IA — usa la tua API Key dal pannello IA</div>
+            <div id="shop-place-title">Visualize in your scene</div>
+            <div id="shop-place-sub">AI — uses your API Key from the AI panel</div>
           </div>
           <div id="shop-place-close" onclick="shopPlaceClose()" tabindex="-1">
             <svg viewBox="0 0 10 10">
@@ -615,36 +613,36 @@
           </div>
           <div class="shop-ai-row">
             <button class="ai-capture-btn" id="shop-ai-capture-btn" onclick="shopOrderCapture()">
-              📷 Cattura scena
+              📷 Capture scene
             </button>
-            <div class="ai-capture-thumb" id="shop-ai-capture-thumb">Nessuna cattura</div>
+            <div class="ai-capture-thumb" id="shop-ai-capture-thumb">No capture</div>
           </div>
           <textarea
             id="shop-ai-prompt"
-            placeholder="es. sostituisci il divano esistente con questo, lascia tutto il resto uguale..."
+            placeholder="e.g. replace the existing sofa with this one, keep everything else the same..."
           ></textarea>
           <button class="ai-generate-btn" id="shop-ai-generate-btn" onclick="shopAiGenerate()">
-            Posiziona il mobile nella scena
+            Place the furniture in the scene
           </button>
           <div class="ai-status" id="shop-ai-status"></div>
           <div id="shop-ai-result">
-            <img id="shop-ai-result-img" alt="" onclick="shopAiOpenResult()" title="Clicca per ingrandire" />
-            <div id="shop-ai-img-zoom-hint" onclick="shopAiOpenResult()" title="Espandi">🔍</div>
+            <img id="shop-ai-result-img" alt="" onclick="shopAiOpenResult()" title="Click to enlarge" />
+            <div id="shop-ai-img-zoom-hint" onclick="shopAiOpenResult()" title="Expand">🔍</div>
           </div>
           <button class="ai-dl-btn" id="shop-ai-dl-btn" onclick="shopAiDownload()">
-            Scarica immagine
+            Download image
           </button>
 
           <div id="shop-ai-video-divider"></div>
           <button class="ai-generate-btn" id="shop-ai-video-btn" onclick="shopAiGenerateVideo()">
-            🎬 Genera video
+            🎬 Generate video
           </button>
-          <div class="ai-status" id="shop-ai-video-status">Anima l'immagine generata (o la cattura). Richiede da 1 a 3 minuti.</div>
+          <div class="ai-status" id="shop-ai-video-status">Animates the generated image (or the capture). Takes 1 to 3 minutes.</div>
           <div id="shop-ai-video-result">
             <video id="shop-ai-video" controls playsinline loop></video>
           </div>
           <button class="ai-dl-btn" id="shop-ai-video-dl-btn" onclick="shopAiDownloadVideo()">
-            Scarica video
+            Download video
           </button>
         </div>
       </div>
@@ -655,8 +653,8 @@
       <div id="shop-ar-card">
         <div id="shop-ar-header">
           <div>
-            <div id="shop-ar-title">Vedi nel tuo spazio</div>
-            <div id="shop-ar-sub">Realtà aumentata — con la fotocamera del telefono</div>
+            <div id="shop-ar-title">See it in your space</div>
+            <div id="shop-ar-sub">Augmented reality — using your phone camera</div>
           </div>
           <div id="shop-ar-close" onclick="shopArClose()" tabindex="-1">
             <svg viewBox="0 0 10 10">
@@ -681,7 +679,7 @@
               <path d="M3 7V5a2 2 0 012-2h2M17 3h2a2 2 0 012 2v2M21 17v2a2 2 0 01-2 2h-2M7 21H5a2 2 0 01-2-2v-2"/>
               <path d="M12 8l3.5 2v4L12 16l-3.5-2v-4L12 8z"/>
             </svg>
-            Vedi in AR
+            View in AR
           </button>
           <div slot="progress-bar"></div>
         </model-viewer>
@@ -700,23 +698,23 @@
     <div id="pano-modal" aria-hidden="true">
       <div id="pano-modal-backdrop"></div>
       <div id="pano-modal-box">
-        <button id="pano-modal-close" title="Chiudi">✕</button>
+        <button id="pano-modal-close" title="Close">✕</button>
         <div id="pano-modal-badge">360°</div>
         <div id="pano-room-label"></div>
         <canvas id="pano-canvas"></canvas>
         <div id="pano-hotspots"></div>
-        <div id="pano-hint">Trascina per esplorare · Scorri per zoom</div>
+        <div id="pano-hint">Drag to explore · Scroll to zoom</div>
         <!-- Bottom close dock — shown on desktop and mobile alongside the
              top-corner ✕ (on mobile the ✕ is hidden, since it's too
              small/unreliable to tap under the notch/Dynamic Island).
              Both buttons call the same closePanoModal(). -->
-        <button id="pano-modal-close-dock" title="Chiudi">
+        <button id="pano-modal-close-dock" title="Close">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6 6 18M6 6l12 12"/></svg>
-          Chiudi
+          Close
         </button>
         <div id="pano-loading">
           <div id="pano-spinner"></div>
-          Caricamento...
+          Loading...
         </div>
       </div>
     </div>
@@ -734,8 +732,8 @@
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
     <script src="scenes-fp.js"></script>
     <script src="script-fp.js"></script>
-    <script src="shop.js?v=7"></script>
-    <script type="module" src="shop3d.js?v=6"></script>
-    <script type="module" src="pano360.js?v=2"></script>
+    <script src="shop.js?v=8"></script>
+    <script type="module" src="shop3d.js?v=7"></script>
+    <script type="module" src="pano360.js?v=3"></script>
   </body>
 </html>

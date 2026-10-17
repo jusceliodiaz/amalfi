@@ -126,7 +126,7 @@ const Shop3D = {
     initRenderer();
     const gen = ++openGen;
     titleEl.textContent = product.name + " — " + product.variant;
-    priceEl.textContent = "€ " + product.price.toLocaleString("it-IT", {
+    priceEl.textContent = "€ " + product.price.toLocaleString("en-US", {
       minimumFractionDigits: product.price % 1 === 0 ? 0 : 2,
       maximumFractionDigits: 2
     });
@@ -147,7 +147,7 @@ const Shop3D = {
     } catch (e) {
       if (gen !== openGen) return;
       spinner.classList.remove("visible");
-      titleEl.textContent = product.name + " — modello 3D non trovato (aggiungi " + product.model + ")";
+      titleEl.textContent = product.name + " — 3D model not found (add " + product.model + ")";
       console.error("Shop3D:", e);
     }
   },
