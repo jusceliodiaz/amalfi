@@ -12,7 +12,7 @@ import * as THREE from "three";
 const TOUR = {
   aerial: {
     label: "Pool",
-    src: "images/3dpano1.jpeg",
+    src: "images/3dpano1b.png",
     hotspots: [{ lon: 180, lat: 0, label: "Terrace", leadsTo: "pool" }]
   },
   pool: {

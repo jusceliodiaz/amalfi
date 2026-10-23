@@ -20,90 +20,6 @@ html, body {
   user-select: none; -webkit-user-select: none;
 }
 
-/* ── Preloader — gates the experience until poster + videos + the
-   aerial⇄pool frame sequence are fully cached, so the first transition
-   never hits a missing frame. ── */
-#preloader {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 28px;
-  background:
-    repeating-linear-gradient(
-      -45deg,
-      rgba(20, 19, 15, 0.035) 0px,
-      rgba(20, 19, 15, 0.035) 1px,
-      transparent 1px,
-      transparent 64px
-    ),
-    #e9e1d0;
-  cursor: default;
-  transition: opacity 0.6s var(--ease);
-}
-#preloader.hide { opacity: 0; pointer-events: none; }
-#preloader-title {
-  margin: 0;
-  padding: 0 16px;
-  font-family: 'Cormorant Garamond', 'DM Sans', serif;
-  font-size: clamp(34px, 6vw, 60px);
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  line-height: 1.05;
-  text-align: center;
-  color: #26241d;
-}
-#preloader-status {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  color: #26241d;
-}
-#preloader-status span {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(38, 36, 29, 0.55);
-}
-#preloader-pct {
-  font-family: 'Cormorant Garamond', 'DM Sans', serif;
-  font-size: 34px;
-  font-weight: 500;
-  color: var(--warm);
-  line-height: 1;
-}
-#preloader.ready #preloader-status { display: none; }
-#preloader-start {
-  opacity: 0;
-  transform: translateY(6px);
-  pointer-events: none;
-  padding: 13px 34px;
-  border: none;
-  border-radius: 999px;
-  background: var(--warm);
-  color: #14130f;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease), background 0.2s;
-}
-#preloader-start:hover { background: #8ed08e; }
-#preloader.ready #preloader-start {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-@media (max-width: 600px) {
-  #preloader-pct { font-size: 28px; }
-}
-
 /* ── Cursor ── */
 #cursor {
   position: fixed;
@@ -166,9 +82,9 @@ html, body {
   z-index: 1;
 }
 
-/* ── Slider A/B side-B video (Pool) — always playing underneath, instant
-   cut with no transition/fade when the drag reaches the end ── */
-#ab-video-b {
+/* ── Day/night videos — B = night (loop or transition clip), C = reversed
+   transition clip, D = night loop after the clip; opacity toggles, no fade ── */
+#ab-video-b, #ab-video-c, #ab-video-d {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
@@ -177,8 +93,12 @@ html, body {
   pointer-events: none;
   transition: none;
 }
-#stage.ab-show-b #main-video { opacity: 0; }
+#stage.ab-show-b #main-video, #stage.ab-show-c #main-video, #stage.ab-show-d #main-video { opacity: 0; }
+#stage.ab-show-d #ab-video-d { opacity: 1; }
 #stage.ab-show-b #ab-video-b { opacity: 1; }
+/* Reverse transition clip (night → day) sits above B while it plays */
+#ab-video-c { z-index: 2; }
+#stage.ab-show-c #ab-video-c { opacity: 1; }
 
 /* ── Sequence canvas ── */
 #seq-canvas {
@@ -305,90 +225,78 @@ html, body {
 #track.show { opacity: 1; }
 
 /* ── Slider A/B — Pool: scrubbing day video (side A) ⇄ night video (side B) ── */
-#ab-slider {
+/* ── Scene controls — top center (second row on phones) ── */
+#scene-controls {
   position: fixed;
-  bottom: 114px;
+  top: max(20px, env(safe-area-inset-top, 20px));
   left: 50%;
   transform: translateX(-50%);
-  z-index: 15;
-  display: none;
+  z-index: 55;
+  display: flex;
   align-items: center;
   gap: 10px;
+}
+#pano-btn {
+  display: none;
+  align-items: center;
+  gap: 8px;
   height: 44px;
-  padding: 0 14px 0 16px;
+  padding: 0 18px 0 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(120, 130, 140, 0.45);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  cursor: none;
+  transition: background 0.2s, border-color 0.2s;
+}
+#pano-btn.show { display: inline-flex; }
+#pano-btn svg { width: 18px; height: 18px; }
+#pano-btn:hover {
+  background: rgba(120, 130, 140, 0.62);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+#pano-btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+/* ── Day / night toggle — one pill, two round buttons (sun | moon) ── */
+#ab-slider {
+  display: none;
+  align-items: center;
+  gap: 4px;
+  padding: 3px;
   border-radius: 999px;
   background: rgba(120, 130, 140, 0.45);
   border: 1px solid rgba(255, 255, 255, 0.16);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  touch-action: none;
-  cursor: pointer;
   user-select: none;
 }
 #ab-slider.show { display: flex; }
-#ab-sun {
-  width: 17px;
-  height: 17px;
-  flex-shrink: 0;
-  color: #fff;
-  opacity: 0.9;
-  pointer-events: none;
-}
-#ab-track {
-  position: relative;
-  width: 160px;
-  height: 4px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.35);
-  overflow: visible;
-}
-#ab-track::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: var(--ab-t, 0%);
-  border-radius: 999px;
-  background: rgba(10, 10, 15, 0.85);
-  pointer-events: none;
-}
-#ab-handle {
-  position: absolute;
-  top: 50%;
-  left: 0%;
-  width: 26px;
-  height: 26px;
+.dn-btn {
+  width: 44px;
+  height: 44px;
+  border: none;
   border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  will-change: left;
-}
-#ab-moon {
-  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  pointer-events: none;
-}
-#ab-moon svg {
-  width: 17px;
-  height: 17px;
+  background: transparent;
   color: #fff;
-  opacity: 0.9;
+  cursor: none;
+  transition: background 0.25s var(--ease), color 0.25s var(--ease);
 }
+.dn-btn svg { width: 18px; height: 18px; pointer-events: none; }
+.dn-btn:hover { background: rgba(255, 255, 255, 0.14); }
+.dn-btn.active { background: #fff; color: #14130f; }
+.dn-btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+#ab-slider.busy .dn-btn { pointer-events: none; }
 @media (hover: none) {
-  #ab-slider {
-    bottom: 92px;
-    height: 38px;
-    gap: 8px;
-    padding: 0 10px 0 12px;
-  }
-  #ab-track { width: 110px; }
-  #ab-handle { width: 22px; height: 22px; }
-  #ab-moon svg { width: 14px; height: 14px; }
+  #pano-btn, .dn-btn { cursor: pointer; }
 }
 
 #track-pts {
@@ -617,116 +525,79 @@ html, body {
    AI STUDIO — Image / Video / Voice (Gemini)
    ══════════════════════════════════════════════════════ */
 
-#ai-dock {
+/* ── Side menu — always-open floating panel, top-left: AI Studio, Gallery ── */
+#side-menu {
   position: fixed;
   top: max(20px, env(safe-area-inset-top, 20px));
-  left: 50%;
-  transform: translateX(-50%);
+  left: max(20px, env(safe-area-inset-left, 20px));
   z-index: 60;
+  width: 248px;
+  padding: 6px;
   display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-#ai-trigger-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  padding: 11px 20px 11px 16px;
-  border-radius: 999px;
+  flex-direction: column;
+  gap: 2px;
+  border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.16);
-  background: rgba(120, 130, 140, 0.45);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: rgba(20, 19, 15, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   color: #fff;
   font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
+}
+.side-menu-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 52px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 14px;
+  background: transparent;
+  color: #fff;
+  font-family: inherit;
+  text-align: left;
+  cursor: none;
+  transition: background 0.2s;
+}
+.side-menu-item svg { width: 22px; height: 22px; flex-shrink: 0; }
+.side-menu-item:hover, .side-menu-item.active { background: rgba(255, 255, 255, 0.12); }
+.side-menu-label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 14px;
   font-weight: 600;
-  letter-spacing: 0.06em;
-  cursor: none;
-  transition: background 0.2s, border-color 0.2s;
 }
-#ai-trigger-btn svg { width: 22px; height: 22px; }
-#ai-trigger-btn:hover, #ai-trigger-btn.active {
-  background: rgba(120, 130, 140, 0.62);
-  border-color: rgba(255, 255, 255, 0.28);
+.side-menu-label small {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.65);
 }
-
-/* ── Voice button — circle that only pulses during the live conversation ── */
-#ai-voice-btn {
-  position: relative;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  background: rgba(120, 130, 140, 0.45);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  color: #fff;
-  cursor: none;
-  transition: background 0.2s, border-color 0.2s, color 0.2s;
+#side-menu button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+@media (hover: none) {
+  .side-menu-item { cursor: pointer; }
 }
-#ai-voice-btn svg { width: 18px; height: 18px; position: relative; z-index: 1; }
-#ai-voice-btn:hover {
-  background: rgba(120, 130, 140, 0.62);
-  border-color: rgba(255, 255, 255, 0.28);
+/* Phones: icon-only column so it doesn't cover the scene */
+@media (max-width: 600px) {
+  #side-menu {
+    width: auto;
+    left: max(16px, env(safe-area-inset-left, 16px));
+    padding: 4px;
+    border-radius: 18px;
+  }
+  .side-menu-item { min-height: 44px; width: 44px; padding: 0; justify-content: center; }
+  .side-menu-label { display: none; }
+  #gallery-btn-badge { position: absolute; top: 2px; right: 2px; margin-left: 0; min-width: 16px; height: 16px; padding: 0 4px; font-size: 9px; }
 }
-#ai-voice-btn.connecting {
-  background: rgba(120, 130, 140, 0.45);
-  border-color: var(--warm);
-  color: var(--warm);
-}
-#ai-voice-btn.live {
-  background: #e05353;
-  border-color: #e05353;
-  color: #fff;
-}
-#ai-voice-pulse-ring {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  border: 2px solid #e05353;
-  opacity: 0;
-  pointer-events: none;
-}
-#ai-voice-btn.live #ai-voice-pulse-ring {
-  animation: aiVoicePing 1.4s ease-out infinite;
-}
-@keyframes aiVoicePing {
-  0%   { transform: scale(1);   opacity: 0.7; }
-  100% { transform: scale(1.9); opacity: 0; }
-}
-
-/* ── Gallery button (AI dock) + badge — same chrome as the voice button ── */
-#gallery-btn {
-  position: relative;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  background: rgba(120, 130, 140, 0.45);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  color: #fff;
-  cursor: none;
-  transition: background 0.2s, border-color 0.2s;
-}
-#gallery-btn:hover { background: rgba(120, 130, 140, 0.62); border-color: rgba(255, 255, 255, 0.28); }
 #gallery-btn-badge {
-  position: absolute;
-  top: -3px; right: -3px;
-  min-width: 16px; height: 16px;
-  padding: 0 4px;
+  margin-left: auto;
+  min-width: 22px; height: 22px;
+  padding: 0 7px;
   border-radius: 999px;
   background: var(--warm);
   color: #14130f;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   display: none;
   align-items: center;
@@ -734,7 +605,6 @@ html, body {
   font-family: 'DM Sans', sans-serif;
 }
 #gallery-btn-badge.show { display: flex; }
-@media (hover: none) { #gallery-btn { cursor: pointer; } }
 
 /* ── Gallery modal ── */
 #gallery-modal {
@@ -1214,21 +1084,15 @@ html, body {
 .ai-dl-btn:hover { background: rgba(20, 19, 15, 0.08); }
 
 @media (max-width: 600px) {
-  #ai-trigger-btn span { display: none; }
-  #ai-trigger-btn { padding: 10px; }
   #ai-panel { width: 94vw; }
   #ai-panel-body { grid-template-columns: 1fr; }
   #ai-key-field { grid-column: 1; grid-row: auto; }
   .ai-tab-col:first-child { grid-column: 1; grid-row: auto; }
   .ai-tab-col:last-child { grid-column: 1; grid-row: auto; }
 
-  /* Anchor the AI dock to the left on mobile — centered positioning
-     collides with the right-anchored shop total pill once the price
-     text is wide enough (e.g. "€ 1.357,90"). */
-  #ai-dock {
-    left: max(16px, env(safe-area-inset-left, 16px));
-    transform: none;
-  }
+  /* Second row on phones — the right-anchored total pill would collide. */
+  #scene-controls { top: calc(max(20px, env(safe-area-inset-top, 20px)) + 56px); gap: 8px; }
+  #pano-btn { padding: 0 14px 0 12px; }
 }
 
 /* ══════════════════════════════════════════════════════
