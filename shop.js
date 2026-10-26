@@ -8,18 +8,6 @@
 
 const SHOP_PRODUCTS = [
   {
-    id: "daybed-baldacchino",
-    cat: "sofas",
-    name: "CANOPY DAYBED",
-    variant: "Custom outdoor daybed with canopy and wheels, brown striped fabric",
-    size: "200×160×220 cm",
-    price: 3200,
-    store: "Custom",
-    img: "images/custom.jpeg",
-    model: "glb/custom.glb",
-    desc: "Custom-made outdoor canopy daybed on wheels, dark wood frame, striped upholstery with brown leather-trimmed canopy and matching cushions."
-  },
-  {
     id: "bondholmen",
     cat: "sofas",
     name: "BONDHOLMEN",
